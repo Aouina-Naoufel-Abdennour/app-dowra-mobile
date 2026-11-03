@@ -35,13 +35,13 @@ class EventLabels {
   final bool pmr;
 
   factory EventLabels.fromJson(Map<String, dynamic> json) => EventLabels(
-        hiddenGem: json['hidden_gem'] == true,
-        featured: json['featured'] == true,
-        wilayaOfDay: json['wilaya_of_day'] == true,
-        family: json['family'] == true,
-        womenOnly: json['women_only'] == true,
-        pmr: json['pmr'] == true,
-      );
+    hiddenGem: json['hidden_gem'] == true,
+    featured: json['featured'] == true,
+    wilayaOfDay: json['wilaya_of_day'] == true,
+    family: json['family'] == true,
+    womenOnly: json['women_only'] == true,
+    pmr: json['pmr'] == true,
+  );
 }
 
 /// Sortie en carte (listes, accueil, favoris).
@@ -149,27 +149,23 @@ class EventSessionInfo {
 
   /// Billets encore disponibles par type (null : illimité).
   final Map<int, int?> ticketsRemaining;
-  final List<({String label, String? time})> pickupPoints;
+  final List<({String label, String? time, int? price})> pickupPoints;
 
   factory EventSessionInfo.fromJson(Map<String, dynamic> json) => EventSessionInfo(
-        id: json['id'] as int,
-        startsAt: DateTime.parse(json['starts_at'] as String),
-        endsAt: DateTime.tryParse(json['ends_at'] as String? ?? ''),
-        label: json['label'] as String?,
-        capacity: json['capacity'] as int?,
-        remaining: json['remaining'] as int?,
-        soldOut: json['sold_out'] == true,
-        ticketsRemaining: {
-          for (final entry in (json['tickets_remaining'] as Map? ?? const {}).entries) int.parse('${entry.key}'): entry.value as int?,
-        },
-        pickupPoints: [
-          for (final point in json['pickup_points'] as List? ?? const []) (label: '${point['label']}', time: point['time'] as String?),
-        ],
-      );
+    id: json['id'] as int,
+    startsAt: DateTime.parse(json['starts_at'] as String),
+    endsAt: DateTime.tryParse(json['ends_at'] as String? ?? ''),
+    label: json['label'] as String?,
+    capacity: json['capacity'] as int?,
+    remaining: json['remaining'] as int?,
+    soldOut: json['sold_out'] == true,
+    ticketsRemaining: {for (final entry in (json['tickets_remaining'] as Map? ?? const {}).entries) int.parse('${entry.key}'): entry.value as int?},
+    pickupPoints: [for (final point in json['pickup_points'] as List? ?? const []) (label: '${point['label']}', time: point['time'] as String?, price: (point['price'] as num?)?.toInt())],
+  );
 }
 
 class TicketInfo {
-  const TicketInfo({required this.id, required this.kind, required this.name, required this.price, required this.seats, required this.onSale});
+  const TicketInfo({required this.id, required this.kind, required this.name, required this.price, required this.seats, required this.onSale, this.numbered = false, this.seatSection});
 
   final int id;
   final String kind;
@@ -178,14 +174,20 @@ class TicketInfo {
   final int seats;
   final bool onSale;
 
+  /// Place numérotée à choisir sur le plan de salle, dans cette section.
+  final bool numbered;
+  final String? seatSection;
+
   factory TicketInfo.fromJson(Map<String, dynamic> json) => TicketInfo(
-        id: json['id'] as int,
-        kind: json['kind'] as String? ?? 'normal',
-        name: json['name'] as String? ?? '',
-        price: json['price'] as int? ?? 0,
-        seats: json['seats'] as int? ?? 1,
-        onSale: json['on_sale'] != false,
-      );
+    id: json['id'] as int,
+    kind: json['kind'] as String? ?? 'normal',
+    name: json['name'] as String? ?? '',
+    price: json['price'] as int? ?? 0,
+    seats: json['seats'] as int? ?? 1,
+    onSale: json['on_sale'] != false,
+    numbered: json['numbered'] == true,
+    seatSection: json['seat_section'] as String?,
+  );
 }
 
 class OrganizerCard {
@@ -200,14 +202,14 @@ class OrganizerCard {
   final int followersCount;
 
   factory OrganizerCard.fromJson(Map<String, dynamic> json) => OrganizerCard(
-        slug: json['slug'] as String,
-        name: json['name'] as String? ?? '',
-        verified: json['verified'] == true,
-        isPro: json['is_pro'] == true,
-        rating: (json['rating'] as num?)?.toDouble(),
-        reviewsCount: json['reviews_count'] as int? ?? 0,
-        followersCount: json['followers_count'] as int? ?? 0,
-      );
+    slug: json['slug'] as String,
+    name: json['name'] as String? ?? '',
+    verified: json['verified'] == true,
+    isPro: json['is_pro'] == true,
+    rating: (json['rating'] as num?)?.toDouble(),
+    reviewsCount: json['reviews_count'] as int? ?? 0,
+    followersCount: json['followers_count'] as int? ?? 0,
+  );
 }
 
 class Weather {
@@ -268,7 +270,11 @@ class EventDetail {
     this.entryDeadline,
     this.bookable = false,
     this.paymentFees = const PaymentFees(),
+    this.groupOffer,
   });
+
+  /// Offre de groupe : remise en % à partir d'un nombre de billets.
+  final ({int min, int percent})? groupOffer;
 
   final EventCard card;
   final String? description;
@@ -311,7 +317,10 @@ class EventDetail {
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     final venue = json['venue'] as Map<String, dynamic>?;
     return EventDetail(
-      card: EventCard.fromJson({...json, 'organizer': {'slug': json['organizer']['slug'], 'name': json['organizer']['name'], 'verified': json['organizer']['verified']}}),
+      card: EventCard.fromJson({
+        ...json,
+        'organizer': {'slug': json['organizer']['slug'], 'name': json['organizer']['name'], 'verified': json['organizer']['verified']},
+      }),
       description: json['description'] as String?,
       photos: [
         for (final media in json['media'] as List? ?? const [])
@@ -322,9 +331,7 @@ class EventDetail {
       bookingLabel: (json['type'] as Map<String, dynamic>?)?['booking_label'] as String? ?? '',
       typeFields: {for (final entry in (json['type_fields'] as Map? ?? const {}).entries) '${entry.key}': '${entry.value}'},
       includes: [for (final item in json['includes'] as List? ?? const []) '$item'],
-      program: [
-        for (final step in json['program'] as List? ?? const []) (day: '${step['day']}', title: '${step['title']}', text: step['text'] as String?),
-      ],
+      program: [for (final step in json['program'] as List? ?? const []) (day: '${step['day']}', title: '${step['title']}', text: step['text'] as String?)],
       venueName: venue?['name'] as String?,
       venueAddress: venue?['address'] as String?,
       meetingPoint: json['meeting_point'] as String?,
@@ -342,23 +349,31 @@ class EventDetail {
       shareUrl: json['share_url'] as String? ?? '',
       saleModeValue: (json['sale_mode'] as Map<String, dynamic>?)?['value'] as String? ?? 'en_ligne',
       nominativeTickets: json['nominative_tickets'] == true,
-      bookingOptions: [
-        for (final option in json['booking_options'] as List? ?? const []) (code: '${option['code']}', name: '${option['name']}', price: option['price'] as int? ?? 0),
-      ],
-      simplePaymentMethods: [
-        for (final method in json['simple_payment_methods'] as List? ?? const []) (value: '${method['value']}', label: '${method['label']}'),
-      ],
+      bookingOptions: [for (final option in json['booking_options'] as List? ?? const []) (code: '${option['code']}', name: '${option['name']}', price: option['price'] as int? ?? 0)],
+      simplePaymentMethods: [for (final method in json['simple_payment_methods'] as List? ?? const []) (value: '${method['value']}', label: '${method['label']}')],
       depositPercent: json['deposit_percent'] as int?,
       entryDeadline: json['entry_deadline'] as String?,
       bookable: json['bookable'] == true,
       paymentFees: PaymentFees.fromJson(json['payment_fees']),
+      groupOffer: json['group_offer'] is Map ? (min: json['group_offer']['min'] as int, percent: json['group_offer']['discount_percent'] as int) : null,
     );
   }
 }
 
 /// Page organisateur (GET /organizers/{slug}).
 class OrganizerPage {
-  const OrganizerPage({required this.card, this.description, this.cover, this.wilayaName, this.phone, this.email, required this.socials, required this.isFollowing, required this.events, required this.pastEventsCount});
+  const OrganizerPage({
+    required this.card,
+    this.description,
+    this.cover,
+    this.wilayaName,
+    this.phone,
+    this.email,
+    required this.socials,
+    required this.isFollowing,
+    required this.events,
+    required this.pastEventsCount,
+  });
 
   final OrganizerCard card;
   final String? description;
@@ -372,17 +387,17 @@ class OrganizerPage {
   final int pastEventsCount;
 
   factory OrganizerPage.fromJson(Map<String, dynamic> json) => OrganizerPage(
-        card: OrganizerCard.fromJson(json),
-        description: json['description'] as String?,
-        cover: Sizes.fromJson(json['cover']),
-        wilayaName: (json['wilaya'] as Map<String, dynamic>?)?['name'] as String?,
-        phone: json['phone'] as String?,
-        email: json['email'] as String?,
-        socials: {for (final entry in (json['socials'] as Map? ?? const {}).entries) '${entry.key}': '${entry.value}'},
-        isFollowing: json['is_following'] == true,
-        events: [for (final event in json['upcoming_events'] as List? ?? const []) EventCard.fromJson(event as Map<String, dynamic>)],
-        pastEventsCount: json['past_events_count'] as int? ?? 0,
-      );
+    card: OrganizerCard.fromJson(json),
+    description: json['description'] as String?,
+    cover: Sizes.fromJson(json['cover']),
+    wilayaName: (json['wilaya'] as Map<String, dynamic>?)?['name'] as String?,
+    phone: json['phone'] as String?,
+    email: json['email'] as String?,
+    socials: {for (final entry in (json['socials'] as Map? ?? const {}).entries) '${entry.key}': '${entry.value}'},
+    isFollowing: json['is_following'] == true,
+    events: [for (final event in json['upcoming_events'] as List? ?? const []) EventCard.fromJson(event as Map<String, dynamic>)],
+    pastEventsCount: json['past_events_count'] as int? ?? 0,
+  );
 }
 
 /// Accueil (GET /home).
@@ -428,18 +443,28 @@ class MapPoint {
   final double lng;
   final int? priceFrom;
 
-  factory MapPoint.fromJson(Map<String, dynamic> json) => MapPoint(
-        slug: json['slug'] as String,
-        title: json['title'] as String? ?? '',
-        lat: (json['lat'] as num).toDouble(),
-        lng: (json['lng'] as num).toDouble(),
-        priceFrom: json['price_from'] as int?,
-      );
+  factory MapPoint.fromJson(Map<String, dynamic> json) =>
+      MapPoint(slug: json['slug'] as String, title: json['title'] as String? ?? '', lat: (json['lat'] as num).toDouble(), lng: (json['lng'] as num).toDouble(), priceFrom: json['price_from'] as int?);
 }
 
 /// Filtres de l'onglet Explorer (mêmes paramètres que l'API).
 class EventFilters {
-  const EventFilters({this.q, this.wilaya, this.category, this.type, this.when, this.price, this.family = false, this.women = false, this.pmr = false, this.hiddenGem = false, this.setting, this.sort, this.lat, this.lng});
+  const EventFilters({
+    this.q,
+    this.wilaya,
+    this.category,
+    this.type,
+    this.when,
+    this.price,
+    this.family = false,
+    this.women = false,
+    this.pmr = false,
+    this.hiddenGem = false,
+    this.setting,
+    this.sort,
+    this.lat,
+    this.lng,
+  });
 
   final String? q;
   final int? wilaya;
@@ -461,22 +486,22 @@ class EventFilters {
   int get activeCount => [wilaya, category, type, when, price, setting].where((v) => v != null).length + [family, women, pmr, hiddenGem].where((v) => v).length;
 
   Map<String, Object> toQuery() => {
-        if (q != null && q!.isNotEmpty) 'q': q!,
-        'wilaya': ?wilaya,
-        'category': ?category,
-        'type': ?type,
-        'when': ?when,
-        'price': ?price,
-        if (family) 'family': 1,
-        if (women) 'women': 1,
-        if (pmr) 'pmr': 1,
-        if (hiddenGem) 'hidden_gem': 1,
-        'setting': ?setting,
-        'sort': ?sort,
-        'lat': ?lat,
-        'lng': ?lng,
-        if (lat != null) 'radius': 30,
-      };
+    if (q != null && q!.isNotEmpty) 'q': q!,
+    'wilaya': ?wilaya,
+    'category': ?category,
+    'type': ?type,
+    'when': ?when,
+    'price': ?price,
+    if (family) 'family': 1,
+    if (women) 'women': 1,
+    if (pmr) 'pmr': 1,
+    if (hiddenGem) 'hidden_gem': 1,
+    'setting': ?setting,
+    'sort': ?sort,
+    'lat': ?lat,
+    'lng': ?lng,
+    if (lat != null) 'radius': 30,
+  };
 
   EventFilters copyWith({
     Object? q = _keep,
@@ -493,23 +518,22 @@ class EventFilters {
     Object? sort = _keep,
     Object? lat = _keep,
     Object? lng = _keep,
-  }) =>
-      EventFilters(
-        q: q == _keep ? this.q : q as String?,
-        wilaya: wilaya == _keep ? this.wilaya : wilaya as int?,
-        category: category == _keep ? this.category : category as String?,
-        type: type == _keep ? this.type : type as String?,
-        when: when == _keep ? this.when : when as String?,
-        price: price == _keep ? this.price : price as String?,
-        family: family ?? this.family,
-        women: women ?? this.women,
-        pmr: pmr ?? this.pmr,
-        hiddenGem: hiddenGem ?? this.hiddenGem,
-        setting: setting == _keep ? this.setting : setting as String?,
-        sort: sort == _keep ? this.sort : sort as String?,
-        lat: lat == _keep ? this.lat : lat as double?,
-        lng: lng == _keep ? this.lng : lng as double?,
-      );
+  }) => EventFilters(
+    q: q == _keep ? this.q : q as String?,
+    wilaya: wilaya == _keep ? this.wilaya : wilaya as int?,
+    category: category == _keep ? this.category : category as String?,
+    type: type == _keep ? this.type : type as String?,
+    when: when == _keep ? this.when : when as String?,
+    price: price == _keep ? this.price : price as String?,
+    family: family ?? this.family,
+    women: women ?? this.women,
+    pmr: pmr ?? this.pmr,
+    hiddenGem: hiddenGem ?? this.hiddenGem,
+    setting: setting == _keep ? this.setting : setting as String?,
+    sort: sort == _keep ? this.sort : sort as String?,
+    lat: lat == _keep ? this.lat : lat as double?,
+    lng: lng == _keep ? this.lng : lng as double?,
+  );
 
   @override
   bool operator ==(Object other) => other is EventFilters && other.toQuery().toString() == toQuery().toString();
@@ -519,3 +543,19 @@ class EventFilters {
 }
 
 const _keep = Object();
+
+/// Plan de salle d'une séance (GET /sessions/{id}/seats) : sections, rangs et places déjà prises.
+class SeatMap {
+  const SeatMap({required this.sections, required this.taken});
+
+  final List<({String key, String name, List<({String label, int seats})> rows})> sections;
+  final Set<String> taken;
+
+  factory SeatMap.fromJson(Map<String, dynamic> json) => SeatMap(
+    sections: [
+      for (final section in json['sections'] as List? ?? const [])
+        (key: '${section['key']}', name: '${section['name']}', rows: [for (final row in section['rows'] as List? ?? const []) (label: '${row['label']}', seats: row['seats'] as int? ?? 0)]),
+    ],
+    taken: {for (final seat in json['taken'] as List? ?? const []) '$seat'},
+  );
+}

@@ -987,4 +987,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get giftThisOuting => 'Give this outing';
+
+  @override
+  String get seatsTitle => 'Pick your seats';
+
+  @override
+  String get seatsHint =>
+      'Choose the ticket, then tap a free seat on the plan.';
+
+  @override
+  String get seatFree => 'Free';
+
+  @override
+  String get seatTaken => 'Taken';
+
+  @override
+  String get seatMine => 'Your seat';
+
+  @override
+  String seatsChosen(int count) {
+    return '$count seat(s)';
+  }
+
+  @override
+  String get stage => 'Stage';
+
+  @override
+  String get promoCode => 'Promo code (optional)';
+
+  @override
+  String get promoHint => 'The discount applies when you confirm.';
+
+  @override
+  String groupDiscount(int percent) {
+    return 'Group offer (−$percent%)';
+  }
+
+  @override
+  String groupOffer(int percent, int count) {
+    return 'Group offer: −$percent% from $count tickets';
+  }
+
+  @override
+  String get shuttle => 'Shuttle';
+
+  @override
+  String get organizerSpace => 'Organizer space';
+
+  @override
+  String get organizerSpaceHint =>
+      'Events, bookings, promotion and money, on the Dowra website.';
 }

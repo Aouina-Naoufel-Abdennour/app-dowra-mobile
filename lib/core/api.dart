@@ -10,6 +10,14 @@ String defaultApiUrl() {
   return 'http://127.0.0.1:8000/api/v1';
 }
 
+/// Adresse du site web (espace organisateur), par --dart-define=SITE_URL ; en local, le site Next.js.
+String defaultSiteUrl() {
+  const fromEnv = String.fromEnvironment('SITE_URL');
+  if (fromEnv.isNotEmpty) return fromEnv;
+  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) return 'http://10.0.2.2:3000';
+  return 'http://127.0.0.1:3000';
+}
+
 /// Erreur lisible renvoyée par l'API (message de validation traduit) ; « network » si le serveur ne répond pas.
 class ApiException implements Exception {
   ApiException(this.message, {this.status});
@@ -41,21 +49,18 @@ class ApiException implements Exception {
 
 /// Client HTTP : langue de l'app et jeton ajoutés à chaque requête.
 Dio createDio({required String baseUrl, required Future<String?> Function() token, required String Function() locale}) {
-  final dio = Dio(BaseOptions(
-    baseUrl: baseUrl,
-    connectTimeout: const Duration(seconds: 10),
-    receiveTimeout: const Duration(seconds: 20),
-    headers: {'Accept': 'application/json'},
-  ));
+  final dio = Dio(BaseOptions(baseUrl: baseUrl, connectTimeout: const Duration(seconds: 10), receiveTimeout: const Duration(seconds: 20), headers: {'Accept': 'application/json'}));
 
-  dio.interceptors.add(InterceptorsWrapper(
-    onRequest: (options, handler) async {
-      options.headers['Accept-Language'] = locale();
-      final value = await token();
-      if (value != null) options.headers['Authorization'] = 'Bearer $value';
-      handler.next(options);
-    },
-  ));
+  dio.interceptors.add(
+    InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        options.headers['Accept-Language'] = locale();
+        final value = await token();
+        if (value != null) options.headers['Authorization'] = 'Bearer $value';
+        handler.next(options);
+      },
+    ),
+  );
 
   return dio;
 }

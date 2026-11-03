@@ -1797,6 +1797,90 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Offrir cette sortie'**
   String get giftThisOuting;
+
+  /// No description provided for @seatsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisis tes places'**
+  String get seatsTitle;
+
+  /// No description provided for @seatsHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisis le billet, puis touche une place libre sur le plan.'**
+  String get seatsHint;
+
+  /// No description provided for @seatFree.
+  ///
+  /// In fr, this message translates to:
+  /// **'Libre'**
+  String get seatFree;
+
+  /// No description provided for @seatTaken.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prise'**
+  String get seatTaken;
+
+  /// No description provided for @seatMine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ta place'**
+  String get seatMine;
+
+  /// No description provided for @seatsChosen.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} place(s)'**
+  String seatsChosen(int count);
+
+  /// No description provided for @stage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scène'**
+  String get stage;
+
+  /// No description provided for @promoCode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code promo (facultatif)'**
+  String get promoCode;
+
+  /// No description provided for @promoHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'La remise s\'applique quand tu valides.'**
+  String get promoHint;
+
+  /// No description provided for @groupDiscount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offre de groupe (−{percent} %)'**
+  String groupDiscount(int percent);
+
+  /// No description provided for @groupOffer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offre de groupe : −{percent} % dès {count} billets'**
+  String groupOffer(int percent, int count);
+
+  /// No description provided for @shuttle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Navette'**
+  String get shuttle;
+
+  /// No description provided for @organizerSpace.
+  ///
+  /// In fr, this message translates to:
+  /// **'Espace organisateur'**
+  String get organizerSpace;
+
+  /// No description provided for @organizerSpaceHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Événements, réservations, promotion et argent, sur le site Dowra.'**
+  String get organizerSpaceHint;
 }
 
 class _AppLocalizationsDelegate

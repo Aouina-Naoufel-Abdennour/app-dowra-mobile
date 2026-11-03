@@ -287,6 +287,56 @@ void main() {
     expect(store.data['dowra_offline_booking_DW7K3P9Q'], isNotNull);
   });
 
+  testWidgets('places numérotées : le plan de salle fixe la quantité, et le code promo est envoyé', (tester) async {
+    final theatre = EventDetail.fromJson({
+      ...detailJson(),
+      'tickets': [{'id': 7, 'kind': 'normal', 'name': 'Parterre', 'price': 800, 'seats': 1, 'on_sale': true, 'numbered': true, 'seat_section': 'parterre'}],
+      'bookable': true,
+    });
+    when(() => repository.currentUser()).thenAnswer((_) async => user(name: 'Amina', onboarded: true));
+    when(() => repository.event('chrea')).thenAnswer((_) async => theatre);
+    when(() => repository.availability('chrea')).thenAnswer((_) async => Availability.fromJson({
+          'sessions': [{'id': 3, 'starts_at': '2026-11-06T19:00:00+01:00', 'capacity': 4, 'remaining': 3, 'sold_out': false, 'tickets_remaining': {'7': 3}, 'pickup_points': []}],
+          'max_per_person': 10,
+          'already_booked': 0,
+          'waitlist': [],
+        }));
+    when(() => repository.seats(3)).thenAnswer((_) async => SeatMap.fromJson({
+          'sections': [{'key': 'parterre', 'name': 'Parterre', 'rows': [{'label': 'A', 'seats': 4}]}],
+          'taken': ['parterre-A-1'],
+        }));
+    when(() => repository.book(any())).thenAnswer((_) async => Booking.fromJson(bookingJson()));
+    when(() => repository.bookingJson('DW7K3P9Q')).thenAnswer((_) async => bookingJson());
+    when(() => repository.bookingsJson(any())).thenAnswer((_) async => [bookingJson()]);
+    when(() => repository.pay(any(), method: any(named: 'method'))).thenAnswer((_) async => (paymentUrl: null, booking: Booking.fromJson(bookingJson())));
+
+    await launch(tester, introSeen: true);
+    await tester.tap(find.text('Randonnée des cèdres de Chréa'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Réserver'));
+    await tester.pumpAndSettle();
+
+    // La place prise ne réagit pas ; deux places libres donnent 2 billets.
+    await tester.tap(find.bySemanticsLabel(RegExp(r'^Parterre, A 1 ·')));
+    await tester.tap(find.bySemanticsLabel(RegExp(r'^Parterre, A 2 ·')));
+    await tester.pump();
+    await tester.tap(find.bySemanticsLabel(RegExp(r'^Parterre, A 3 ·')));
+    await tester.pump();
+    expect(find.text('1 600 DA'), findsWidgets);
+
+    await tester.scrollUntilVisible(find.widgetWithText(TextField, 'Code promo (facultatif)'), 300, scrollable: find.byType(Scrollable).first);
+    await tester.pumpAndSettle();
+    await tester.enterText(find.widgetWithText(TextField, 'Code promo (facultatif)'), 'noel26');
+    await tester.pump();
+    await tester.tap(find.textContaining('Payer'));
+    await tester.pumpAndSettle();
+
+    final sent = verify(() => repository.book(captureAny())).captured.single as Map<String, Object?>;
+    expect(sent['items'], [{'ticket_type_id': 7, 'quantity': 2}]);
+    expect(sent['seats'], [{'ticket_type_id': 7, 'seat': 'parterre-A-2'}, {'ticket_type_id': 7, 'seat': 'parterre-A-3'}]);
+    expect(sent['promo_code'], 'NOEL26');
+  });
+
   testWidgets('sans réseau, Mes billets affiche la copie gardée sur le téléphone', (tester) async {
     when(() => repository.currentUser()).thenAnswer((_) async => user(name: 'Amina', onboarded: true));
     when(() => repository.bookingsJson(any())).thenThrow(ApiException('network'));

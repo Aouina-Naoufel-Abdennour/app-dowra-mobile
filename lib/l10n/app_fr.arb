@@ -513,5 +513,43 @@
       }
     }
   },
-  "giftThisOuting": "Offrir cette sortie"
+  "giftThisOuting": "Offrir cette sortie",
+  "seatsTitle": "Choisis tes places",
+  "seatsHint": "Choisis le billet, puis touche une place libre sur le plan.",
+  "seatFree": "Libre",
+  "seatTaken": "Prise",
+  "seatMine": "Ta place",
+  "seatsChosen": "{count} place(s)",
+  "@seatsChosen": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "stage": "Scène",
+  "promoCode": "Code promo (facultatif)",
+  "promoHint": "La remise s'applique quand tu valides.",
+  "groupDiscount": "Offre de groupe (−{percent} %)",
+  "@groupDiscount": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "groupOffer": "Offre de groupe : −{percent} % dès {count} billets",
+  "@groupOffer": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shuttle": "Navette",
+  "organizerSpace": "Espace organisateur",
+  "organizerSpaceHint": "Événements, réservations, promotion et argent, sur le site Dowra."
 }

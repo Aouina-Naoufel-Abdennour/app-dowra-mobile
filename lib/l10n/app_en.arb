@@ -282,5 +282,19 @@
   "giftReceived": "Received",
   "giftBalance": "Balance: {amount}",
   "giftValidUntil": "until {date}",
-  "giftThisOuting": "Give this outing"
+  "giftThisOuting": "Give this outing",
+  "seatsTitle": "Pick your seats",
+  "seatsHint": "Choose the ticket, then tap a free seat on the plan.",
+  "seatFree": "Free",
+  "seatTaken": "Taken",
+  "seatMine": "Your seat",
+  "seatsChosen": "{count} seat(s)",
+  "stage": "Stage",
+  "promoCode": "Promo code (optional)",
+  "promoHint": "The discount applies when you confirm.",
+  "groupDiscount": "Group offer (−{percent}%)",
+  "groupOffer": "Group offer: −{percent}% from {count} tickets",
+  "shuttle": "Shuttle",
+  "organizerSpace": "Organizer space",
+  "organizerSpaceHint": "Events, bookings, promotion and money, on the Dowra website."
 }

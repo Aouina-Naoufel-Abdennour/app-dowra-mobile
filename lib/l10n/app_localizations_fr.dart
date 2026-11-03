@@ -992,4 +992,54 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get giftThisOuting => 'Offrir cette sortie';
+
+  @override
+  String get seatsTitle => 'Choisis tes places';
+
+  @override
+  String get seatsHint =>
+      'Choisis le billet, puis touche une place libre sur le plan.';
+
+  @override
+  String get seatFree => 'Libre';
+
+  @override
+  String get seatTaken => 'Prise';
+
+  @override
+  String get seatMine => 'Ta place';
+
+  @override
+  String seatsChosen(int count) {
+    return '$count place(s)';
+  }
+
+  @override
+  String get stage => 'Scène';
+
+  @override
+  String get promoCode => 'Code promo (facultatif)';
+
+  @override
+  String get promoHint => 'La remise s\'applique quand tu valides.';
+
+  @override
+  String groupDiscount(int percent) {
+    return 'Offre de groupe (−$percent %)';
+  }
+
+  @override
+  String groupOffer(int percent, int count) {
+    return 'Offre de groupe : −$percent % dès $count billets';
+  }
+
+  @override
+  String get shuttle => 'Navette';
+
+  @override
+  String get organizerSpace => 'Espace organisateur';
+
+  @override
+  String get organizerSpaceHint =>
+      'Événements, réservations, promotion et argent, sur le site Dowra.';
 }

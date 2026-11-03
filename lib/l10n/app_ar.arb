@@ -282,5 +282,19 @@
   "giftReceived": "مستلمة",
   "giftBalance": "الرصيد: {amount}",
   "giftValidUntil": "حتى {date}",
-  "giftThisOuting": "أهدِ هذه الخرجة"
+  "giftThisOuting": "أهدِ هذه الخرجة",
+  "seatsTitle": "اختر مقاعدك",
+  "seatsHint": "اختر التذكرة، ثم المس مقعدًا شاغرًا في المخطط.",
+  "seatFree": "شاغر",
+  "seatTaken": "محجوز",
+  "seatMine": "مقعدك",
+  "seatsChosen": "{count} مقعد",
+  "stage": "المنصة",
+  "promoCode": "رمز التخفيض (اختياري)",
+  "promoHint": "يُطبّق التخفيض عند التأكيد.",
+  "groupDiscount": "عرض المجموعة (−{percent} %)",
+  "groupOffer": "عرض المجموعة: −{percent} % ابتداءً من {count} تذاكر",
+  "shuttle": "النقل",
+  "organizerSpace": "فضاء المنظّم",
+  "organizerSpaceHint": "الأحداث والحجوزات والترويج والمال، على موقع دورة."
 }

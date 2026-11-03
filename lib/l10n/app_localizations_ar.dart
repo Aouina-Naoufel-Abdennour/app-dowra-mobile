@@ -972,4 +972,53 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get giftThisOuting => 'أهدِ هذه الخرجة';
+
+  @override
+  String get seatsTitle => 'اختر مقاعدك';
+
+  @override
+  String get seatsHint => 'اختر التذكرة، ثم المس مقعدًا شاغرًا في المخطط.';
+
+  @override
+  String get seatFree => 'شاغر';
+
+  @override
+  String get seatTaken => 'محجوز';
+
+  @override
+  String get seatMine => 'مقعدك';
+
+  @override
+  String seatsChosen(int count) {
+    return '$count مقعد';
+  }
+
+  @override
+  String get stage => 'المنصة';
+
+  @override
+  String get promoCode => 'رمز التخفيض (اختياري)';
+
+  @override
+  String get promoHint => 'يُطبّق التخفيض عند التأكيد.';
+
+  @override
+  String groupDiscount(int percent) {
+    return 'عرض المجموعة (−$percent %)';
+  }
+
+  @override
+  String groupOffer(int percent, int count) {
+    return 'عرض المجموعة: −$percent % ابتداءً من $count تذاكر';
+  }
+
+  @override
+  String get shuttle => 'النقل';
+
+  @override
+  String get organizerSpace => 'فضاء المنظّم';
+
+  @override
+  String get organizerSpaceHint =>
+      'الأحداث والحجوزات والترويج والمال، على موقع دورة.';
 }
