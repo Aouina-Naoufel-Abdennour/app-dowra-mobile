@@ -1,0 +1,113 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Dowra",
+  "welcomeKicker": "Yallah, nedowrou !",
+  "welcomeTitle": "Découvre l'Algérie, une sortie à la fois.",
+  "welcomeLead": "Randos, concerts, plages et Grand Sud, réservés en 2 minutes avec des organisateurs vérifiés.",
+  "start": "Commencer",
+  "haveAccount": "J'ai déjà un compte",
+  "loginTitle": "Entre ton",
+  "loginTitleEm": "numéro",
+  "loginLead": "Tu reçois un code par SMS. Pas de mot de passe à retenir.",
+  "phoneLabel": "Numéro de mobile",
+  "phoneHint": "05 50 12 34 56",
+  "sendCode": "Recevoir le code",
+  "invalidPhone": "Entre un numéro mobile algérien (05, 06 ou 07).",
+  "networkError": "Le serveur Dowra ne répond pas. Réessaie dans un instant.",
+  "codeTitle": "Entre ton",
+  "codeTitleEm": "code",
+  "codeSentTo": "On a envoyé un SMS au {phone}",
+  "@codeSentTo": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "verify": "Vérifier",
+  "changeNumber": "Changer de numéro",
+  "testAccounts": "Comptes de test",
+  "demoHint": "Mode test : le numéro d'un compte de test et le code 123456 sont déjà remplis.",
+  "terms": "En continuant, tu acceptes les conditions d'utilisation de Dowra.",
+  "onboardingKicker": "Bienvenue sur Dowra !",
+  "onboardingTitle": "Fais connaissance avec",
+  "onboardingTitleEm": "Dowri",
+  "onboardingLead": "Trois questions et je te propose les sorties qui te ressemblent.",
+  "nameQuestion": "Comment tu t'appelles ?",
+  "wilayaQuestion": "Tu pars d'où ?",
+  "interestsQuestion": "Qu'est-ce qui te fait envie ?",
+  "interestsHint": "Choisis autant d'envies que tu veux.",
+  "chooseWilaya": "Choisir une wilaya",
+  "wilayasOpen": "Ouvertes",
+  "wilayasSoon": "Bientôt",
+  "discover": "Découvrir mes sorties",
+  "later": "Plus tard",
+  "navHome": "Accueil",
+  "navExplore": "Explorer",
+  "navTickets": "Billets",
+  "navFavorites": "Favoris",
+  "navProfile": "Profil",
+  "homeHello": "Salam {name},",
+  "@homeHello": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeHelloGuest": "Salam,",
+  "homeQuestion": "on sort",
+  "homeQuestionEm": "où ?",
+  "searchHint": "Destination, sortie, organisateur…",
+  "heroKicker": "Grand Sud",
+  "heroTitle": "Ce week-end, on part à Taghit",
+  "heroText": "Les sorties des organisateurs arrivent ici, avec leurs départs et leurs prix.",
+  "typesTitle": "Types de sortie",
+  "interestsTitle": "Tes envies",
+  "citiesTitle": "Villes de départ",
+  "open": "Ouverte",
+  "seeAll": "Tout voir",
+  "exploreTitle": "Explorer",
+  "exploreLead": "Choisis un type de sortie : les départs s'affichent ici dès que les organisateurs les publient.",
+  "ticketsTitle": "Mes",
+  "ticketsTitleEm": "billets",
+  "ticketsEmpty": "Tes billets apparaîtront ici dès ta première réservation, avec leur code QR.",
+  "favoritesTitle": "Mes",
+  "favoritesTitleEm": "favoris",
+  "favoritesEmpty": "Touche le cœur d'une sortie ou d'un organisateur pour le retrouver ici.",
+  "guestTitle": "Connecte-toi pour continuer",
+  "guestText": "Un numéro de mobile suffit : tes billets, tes favoris et ton passeport t'attendent.",
+  "login": "Se connecter",
+  "profileTitle": "Mon",
+  "profileTitleEm": "passeport",
+  "level": "Niveau",
+  "points": "{count} pts",
+  "@points": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ambassador": "Ambassadeur",
+  "personalInfo": "Informations personnelles",
+  "language": "Langue",
+  "display": "Affichage",
+  "themeLight": "Clair",
+  "themeDark": "Sombre",
+  "themeSystem": "Système",
+  "logout": "Se déconnecter",
+  "deleteAccount": "Supprimer mon compte",
+  "deleteConfirmTitle": "Supprimer ton compte ?",
+  "deleteConfirmText": "Ton profil et tes préférences sont effacés. Tu pourras recréer un compte avec le même numéro.",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "save": "Enregistrer",
+  "saved": "C'est enregistré.",
+  "name": "Prénom et nom",
+  "email": "E-mail (facultatif)",
+  "wilaya": "Ma wilaya",
+  "interests": "Mes envies",
+  "retry": "Réessayer",
+  "emptyReferentials": "Les listes s'affichent dès que le serveur Dowra répond."
+}
