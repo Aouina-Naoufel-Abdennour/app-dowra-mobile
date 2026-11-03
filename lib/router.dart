@@ -4,10 +4,12 @@ import 'package:go_router/go_router.dart';
 
 import 'core/providers.dart';
 import 'screens/code_screen.dart';
+import 'screens/event_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/favorites_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/onboarding_screen.dart';
+import 'screens/organizer_screen.dart';
 import 'screens/phone_screen.dart';
 import 'screens/profile_edit_screen.dart';
 import 'screens/profile_screen.dart';
@@ -60,6 +62,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/connexion/code', builder: (_, state) => CodeScreen(phone: state.extra as String? ?? '')),
       GoRoute(path: '/premiers-pas', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/profil/infos', builder: (_, _) => const ProfileEditScreen()),
+      GoRoute(path: '/sorties/:slug', builder: (_, state) => EventScreen(slug: state.pathParameters['slug']!)),
+      GoRoute(path: '/organisateurs/:slug', builder: (_, state) => OrganizerScreen(slug: state.pathParameters['slug']!)),
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => DowraShell(shell: shell),
         branches: [

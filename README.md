@@ -4,7 +4,7 @@ Application Flutter de **Dowra** pour iOS et Android (et version web pour les te
 
 | Identifiant | `dz.dowra.app` |
 |---|---|
-| **Versions** | Flutter 3.47 (Dart 3.13), Riverpod 3, go_router 18, Dio 5, flutter_secure_storage 11, textes en ARB (fr, ar, en) |
+| **Versions** | Flutter 3.47 (Dart 3.13), Riverpod 3, go_router 18, Dio 5, flutter_secure_storage 11, flutter_map (OpenStreetMap), geolocator, share_plus, textes en ARB (fr, ar, en) |
 | **Polices intégrées** | Plus Jakarta Sans, Caveat, Noto Kufi Arabic |
 
 ## Démarrer (Android Studio ou terminal)
@@ -46,8 +46,12 @@ Un autre numéro mobile (05, 06 ou 07) crée un nouveau compte et ouvre le premi
 | Premier passage chez Dowri (prénom, wilaya, envies) | `/premiers-pas` |
 | Onglets Accueil, Explorer, Billets, Favoris, Profil | `/accueil`, `/explorer`, `/billets`, `/favoris`, `/profil` |
 | Informations personnelles | `/profil/infos` |
+| Fiche d'une sortie | `/sorties/:slug` |
+| Page organisateur | `/organisateurs/:slug` |
 
-Sans compte, l'accueil et Explorer restent ouverts ; Billets, Favoris et Profil invitent à se connecter.
+Sans compte, l'accueil, Explorer, les fiches et les pages organisateurs restent ouverts ; Billets, Favoris et Profil invitent à se connecter, comme le cœur, l'abonnement et le signalement.
+
+Photos : l'API renvoie des adresses en `localhost` ; sur l'émulateur Android, l'app les réécrit vers `10.0.2.2`.
 
 ## Organisation
 

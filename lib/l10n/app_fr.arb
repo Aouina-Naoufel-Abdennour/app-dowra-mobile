@@ -109,5 +109,163 @@
   "wilaya": "Ma wilaya",
   "interests": "Mes envies",
   "retry": "Réessayer",
-  "emptyReferentials": "Les listes s'affichent dès que le serveur Dowra répond."
+  "emptyReferentials": "Les listes s'affichent dès que le serveur Dowra répond.",
+  "chooseWilayaTitle": "Ta wilaya",
+  "allAlgeria": "Toute l'Algérie",
+  "weekendTitle": "Ce week-end",
+  "featuredTitle": "À la une",
+  "gemsTitle": "Trésors cachés",
+  "newTitle": "Nouveautés",
+  "wilayaOfDay": "Wilaya du jour",
+  "seeOutingsIn": "Les sorties de {wilaya}",
+  "@seeOutingsIn": {
+    "placeholders": {
+      "wilaya": {
+        "type": "String"
+      }
+    }
+  },
+  "priceFrom": "Dès {price}",
+  "@priceFrom": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "free": "Gratuit",
+  "badgeFeatured": "À la une",
+  "badgeGem": "Trésor caché",
+  "verified": "Vérifié",
+  "distanceKm": "{km} km",
+  "@distanceKm": {
+    "placeholders": {
+      "km": {
+        "type": "String"
+      }
+    }
+  },
+  "searchOutings": "Nom, lieu, artiste, organisateur…",
+  "filters": "Filtres",
+  "apply": "Appliquer",
+  "reset": "Tout effacer",
+  "resultsCount": "{count, plural, =1{1 sortie} other{{count} sorties}}",
+  "@resultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noResults": "Aucune sortie ne correspond. Essaie d'élargir les dates ou la wilaya.",
+  "listView": "Liste",
+  "mapView": "Carte",
+  "nearMe": "Près de moi",
+  "nearMeError": "Position indisponible : autorise la localisation dans les réglages.",
+  "whenToday": "Aujourd'hui",
+  "whenTomorrow": "Demain",
+  "whenWeekend": "Ce week-end",
+  "whenWeek": "Cette semaine",
+  "whenMonth": "Ce mois",
+  "priceFree": "Gratuit",
+  "priceUnder2000": "Moins de 2 000 DA",
+  "family": "En famille",
+  "women": "Entre femmes",
+  "pmr": "Accessible PMR",
+  "hiddenGem": "Trésor caché",
+  "indoor": "Intérieur",
+  "outdoor": "Plein air",
+  "anyValue": "Tous",
+  "sortBy": "Trier par",
+  "sortDate": "Date",
+  "sortPopular": "Popularité",
+  "sortPriceAsc": "Prix croissant",
+  "sortDistance": "Distance",
+  "when": "Quand",
+  "price": "Prix",
+  "setting": "Cadre",
+  "category": "Envie",
+  "type": "Type de sortie",
+  "sessions": "Dates et séances",
+  "noSessions": "Aucune séance à venir pour le moment.",
+  "tickets": "Billets",
+  "placesCount": "{count, plural, =1{1 place} other{{count} places}}",
+  "@placesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pickups": "Points de ramassage",
+  "details": "Les infos utiles",
+  "program": "Programme",
+  "includes": "Compris",
+  "place": "Lieu",
+  "meetingPoint": "Point de rendez-vous",
+  "directions": "Itinéraire",
+  "organizer": "Organisateur",
+  "followersCount": "{count, plural, =1{1 abonné} other{{count} abonnés}}",
+  "@followersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "follow": "S'abonner",
+  "following": "Abonné",
+  "cancellation": "Annulation",
+  "saleMode": "Vente",
+  "maxPerPerson": "Maximum {count} billets par personne",
+  "@maxPerPerson": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageMin": "À partir de {age} ans",
+  "@ageMin": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherForecast": "Météo prévue",
+  "rainChance": "{chance} % de pluie",
+  "@rainChance": {
+    "placeholders": {
+      "chance": {
+        "type": "int"
+      }
+    }
+  },
+  "share": "Partager",
+  "report": "Signaler",
+  "reportTitle": "Signaler cette sortie",
+  "reportReason": "Motif",
+  "reportDetails": "Précisions (facultatif)",
+  "reportSend": "Envoyer",
+  "reportSent": "Merci, ton signalement est envoyé à l'équipe Dowra.",
+  "favoriteAdded": "Ajouté à tes favoris",
+  "favoriteRemoved": "Retiré de tes favoris",
+  "similar": "Dans le même esprit",
+  "cancelledEvent": "Cette sortie est annulée.",
+  "endedEvent": "Cette sortie est terminée.",
+  "upcomingOutings": "Ses prochaines sorties",
+  "noUpcoming": "Pas de sortie à venir pour le moment.",
+  "pastOutings": "{count, plural, =0{Aucune sortie passée} =1{1 sortie passée} other{{count} sorties passées}}",
+  "@pastOutings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "about": "À propos",
+  "contact": "Contact",
+  "reportOrganizer": "Signaler cet organisateur",
+  "loginToContinue": "Connecte-toi pour continuer"
 }

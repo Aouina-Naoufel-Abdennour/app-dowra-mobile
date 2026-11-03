@@ -1,4 +1,5 @@
 import 'package:dowra/app.dart';
+import 'package:dowra/core/catalogue.dart';
 import 'package:dowra/core/models.dart';
 import 'package:dowra/core/providers.dart';
 import 'package:dowra/core/repository.dart';
@@ -8,6 +9,41 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockRepository extends Mock implements DowraRepository {}
+
+Map<String, dynamic> eventJson(String slug, String title) => {
+      'id': slug.hashCode,
+      'slug': slug,
+      'title': title,
+      'type': {'slug': 'randonnee', 'name': 'Randonnées et nature', 'icon': 'mountain'},
+      'wilaya': {'code': 16, 'name': 'Alger'},
+      'place': 'Chréa',
+      'organizer': {'slug': 'djazair-rando', 'name': 'Djazaïr Rando', 'verified': true},
+      'next_session_at': '2026-11-06T07:30:00+01:00',
+      'price_from': 1500,
+      'is_free': false,
+      'status': 'publie',
+      'labels': {'featured': true},
+    };
+
+EventDetail detail() => EventDetail.fromJson({
+      ...eventJson('chrea', 'Randonnée des cèdres de Chréa'),
+      'description': 'Douze kilomètres sous les cèdres.',
+      'media': [],
+      'categories': [{'slug': 'nature', 'name': 'Nature et randonnée'}],
+      'type': {'slug': 'randonnee', 'name': 'Randonnées et nature', 'icon': 'mountain', 'booking_label': 'Une place dans un groupe'},
+      'type_fields': {'niveau': 'Moyen', 'distance_km': '12'},
+      'includes': ['Guide'],
+      'program': [],
+      'organizer': {'slug': 'djazair-rando', 'name': 'Djazaïr Rando', 'verified': true, 'is_pro': false, 'rating': 4.9, 'reviews_count': 302, 'followers_count': 3800},
+      'sessions': [{'id': 1, 'starts_at': '2026-11-06T07:30:00+01:00', 'capacity': 25, 'remaining': 25, 'pickup_points': []}],
+      'tickets': [{'id': 1, 'kind': 'normal', 'name': 'Participation', 'price': 1500, 'seats': 1, 'on_sale': true}],
+      'sale_mode': {'label': 'Billet payé en ligne'},
+      'cancellation_policy': {'label': 'Remboursable jusqu\'à 48 heures avant'},
+      'max_per_person': 10,
+      'setting': {'label': 'Plein air'},
+      'is_favorite': false,
+      'share_url': 'http://localhost:3000/fr/sorties/chrea',
+    });
 
 DowraUser user({String? name, bool onboarded = false}) => DowraUser.fromJson({
       'id': 1,
@@ -27,6 +63,8 @@ DowraUser user({String? name, bool onboarded = false}) => DowraUser.fromJson({
 void main() {
   late MockRepository repository;
 
+  setUpAll(() => registerFallbackValue(const EventFilters()));
+
   setUp(() {
     repository = MockRepository();
     when(() => repository.currentUser()).thenAnswer((_) async => null);
@@ -35,6 +73,19 @@ void main() {
         ]);
     when(() => repository.categories()).thenAnswer((_) async => [const Category(slug: 'nature', name: 'Nature et randonnée', icon: 'mountain', color: '#16A34A')]);
     when(() => repository.wilayas()).thenAnswer((_) async => [const Wilaya(id: 16, code: 16, name: 'Alger', isActive: true)]);
+    when(() => repository.home(wilaya: any(named: 'wilaya'))).thenAnswer((_) async => HomeData.fromJson({
+          'featured': [eventJson('chrea', 'Randonnée des cèdres de Chréa')],
+          'this_weekend': {'events': [eventJson('casbah', 'Visite guidée de la Casbah')]},
+          'hidden_gems': [],
+          'new': [],
+        }));
+    when(() => repository.events(any(), page: any(named: 'page'))).thenAnswer((invocation) async => (
+          events: [EventCard.fromJson(eventJson('chrea', 'Randonnée des cèdres de Chréa'))],
+          total: 1,
+          lastPage: 1,
+        ));
+    when(() => repository.event('chrea')).thenAnswer((_) async => detail());
+    when(() => repository.similar(any())).thenAnswer((_) async => []);
   });
 
   Future<void> launch(WidgetTester tester, {bool introSeen = false}) async {
@@ -59,8 +110,35 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Salam,'), findsOneWidget);
-    expect(find.text('Randonnées et nature'), findsOneWidget);
-    expect(find.text('Alger'), findsOneWidget);
+    expect(find.text('Randonnée des cèdres de Chréa'), findsOneWidget);
+    expect(find.text('Ce week-end'), findsOneWidget);
+    expect(find.text('Visite guidée de la Casbah'), findsOneWidget);
+  });
+
+  testWidgets('un type de sortie de l\'accueil ouvre Explorer filtré', (tester) async {
+    await launch(tester, introSeen: true);
+    await tester.tap(find.widgetWithText(ActionChip, 'Randonnées et nature'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('1 sortie'), findsOneWidget);
+    final filters = verify(() => repository.events(captureAny(), page: 1)).captured.last as EventFilters;
+    expect(filters.type, 'randonnee');
+  });
+
+  testWidgets('la fiche affiche les infos du type et demande un compte pour le favori', (tester) async {
+    await launch(tester, introSeen: true);
+    await tester.tap(find.text('Randonnée des cèdres de Chréa'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Djazaïr Rando'), findsWidgets);
+    await tester.scrollUntilVisible(find.text('Moyen'), 300, scrollable: find.byType(Scrollable).first);
+    expect(find.text('Les infos utiles'), findsOneWidget);
+    await tester.scrollUntilVisible(find.byTooltip('Favoris'), -300, scrollable: find.byType(Scrollable).first);
+
+    await tester.tap(find.byTooltip('Favoris'));
+    await tester.pumpAndSettle();
+    expect(find.text('Recevoir le code'), findsOneWidget);
+    verifyNever(() => repository.setFavorite(any(), any()));
   });
 
   testWidgets('l\'arabe passe toute l\'app de droite à gauche', (tester) async {

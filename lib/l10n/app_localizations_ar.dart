@@ -285,4 +285,314 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get emptyReferentials => 'تظهر القوائم بمجرد أن يستجيب خادم دورة.';
+
+  @override
+  String get chooseWilayaTitle => 'ولايتك';
+
+  @override
+  String get allAlgeria => 'كل الجزائر';
+
+  @override
+  String get weekendTitle => 'هذا الأسبوع';
+
+  @override
+  String get featuredTitle => 'في الواجهة';
+
+  @override
+  String get gemsTitle => 'كنوز مخفية';
+
+  @override
+  String get newTitle => 'الجديد';
+
+  @override
+  String get wilayaOfDay => 'ولاية اليوم';
+
+  @override
+  String seeOutingsIn(String wilaya) {
+    return 'خرجات $wilaya';
+  }
+
+  @override
+  String priceFrom(String price) {
+    return 'ابتداء من $price';
+  }
+
+  @override
+  String get free => 'مجاني';
+
+  @override
+  String get badgeFeatured => 'في الواجهة';
+
+  @override
+  String get badgeGem => 'كنز مخفي';
+
+  @override
+  String get verified => 'موثق';
+
+  @override
+  String distanceKm(String km) {
+    return '$km كلم';
+  }
+
+  @override
+  String get searchOutings => 'الاسم، المكان، الفنان، المنظم…';
+
+  @override
+  String get filters => 'التصفية';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get reset => 'مسح الكل';
+
+  @override
+  String resultsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count خرجة',
+      two: 'خرجتان',
+      one: 'خرجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noResults => 'لا توجد خرجة مطابقة. جرب توسيع التواريخ أو الولاية.';
+
+  @override
+  String get listView => 'قائمة';
+
+  @override
+  String get mapView => 'خريطة';
+
+  @override
+  String get nearMe => 'بالقرب مني';
+
+  @override
+  String get nearMeError => 'الموقع غير متاح: اسمح بتحديد الموقع في الإعدادات.';
+
+  @override
+  String get whenToday => 'اليوم';
+
+  @override
+  String get whenTomorrow => 'غدا';
+
+  @override
+  String get whenWeekend => 'نهاية الأسبوع';
+
+  @override
+  String get whenWeek => 'هذا الأسبوع';
+
+  @override
+  String get whenMonth => 'هذا الشهر';
+
+  @override
+  String get priceFree => 'مجاني';
+
+  @override
+  String get priceUnder2000 => 'أقل من 2000 دج';
+
+  @override
+  String get family => 'مع العائلة';
+
+  @override
+  String get women => 'بين النساء';
+
+  @override
+  String get pmr => 'مهيأ لذوي الإعاقة';
+
+  @override
+  String get hiddenGem => 'كنز مخفي';
+
+  @override
+  String get indoor => 'داخلي';
+
+  @override
+  String get outdoor => 'في الهواء الطلق';
+
+  @override
+  String get anyValue => 'الكل';
+
+  @override
+  String get sortBy => 'الترتيب حسب';
+
+  @override
+  String get sortDate => 'التاريخ';
+
+  @override
+  String get sortPopular => 'الشعبية';
+
+  @override
+  String get sortPriceAsc => 'السعر تصاعديا';
+
+  @override
+  String get sortDistance => 'المسافة';
+
+  @override
+  String get when => 'متى';
+
+  @override
+  String get price => 'السعر';
+
+  @override
+  String get setting => 'الإطار';
+
+  @override
+  String get category => 'الرغبة';
+
+  @override
+  String get type => 'نوع الخرجة';
+
+  @override
+  String get sessions => 'التواريخ والمواعيد';
+
+  @override
+  String get noSessions => 'لا يوجد موعد قادم حاليا.';
+
+  @override
+  String get tickets => 'التذاكر';
+
+  @override
+  String placesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مكان',
+      one: 'مكان واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pickups => 'نقاط الالتقاء';
+
+  @override
+  String get details => 'معلومات مفيدة';
+
+  @override
+  String get program => 'البرنامج';
+
+  @override
+  String get includes => 'يشمل';
+
+  @override
+  String get place => 'المكان';
+
+  @override
+  String get meetingPoint => 'نقطة الالتقاء';
+
+  @override
+  String get directions => 'المسار';
+
+  @override
+  String get organizer => 'المنظم';
+
+  @override
+  String followersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مشترك',
+      one: 'مشترك واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get follow => 'اشترك';
+
+  @override
+  String get following => 'مشترك';
+
+  @override
+  String get cancellation => 'الإلغاء';
+
+  @override
+  String get saleMode => 'البيع';
+
+  @override
+  String maxPerPerson(int count) {
+    return '$count تذاكر كحد أقصى للشخص';
+  }
+
+  @override
+  String ageMin(int age) {
+    return 'ابتداء من $age سنة';
+  }
+
+  @override
+  String get weatherForecast => 'الطقس المتوقع';
+
+  @override
+  String rainChance(int chance) {
+    return '$chance % احتمال المطر';
+  }
+
+  @override
+  String get share => 'مشاركة';
+
+  @override
+  String get report => 'إبلاغ';
+
+  @override
+  String get reportTitle => 'الإبلاغ عن هذه الخرجة';
+
+  @override
+  String get reportReason => 'السبب';
+
+  @override
+  String get reportDetails => 'تفاصيل (اختياري)';
+
+  @override
+  String get reportSend => 'إرسال';
+
+  @override
+  String get reportSent => 'شكرا، تم إرسال بلاغك إلى فريق دورة.';
+
+  @override
+  String get favoriteAdded => 'أضيفت إلى مفضلتك';
+
+  @override
+  String get favoriteRemoved => 'أزيلت من مفضلتك';
+
+  @override
+  String get similar => 'بنفس الروح';
+
+  @override
+  String get cancelledEvent => 'هذه الخرجة ملغاة.';
+
+  @override
+  String get endedEvent => 'انتهت هذه الخرجة.';
+
+  @override
+  String get upcomingOutings => 'خرجاته القادمة';
+
+  @override
+  String get noUpcoming => 'لا توجد خرجة قادمة حاليا.';
+
+  @override
+  String pastOutings(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count خرجة سابقة',
+      one: 'خرجة سابقة واحدة',
+      zero: 'لا توجد خرجات سابقة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get about => 'نبذة';
+
+  @override
+  String get contact => 'اتصال';
+
+  @override
+  String get reportOrganizer => 'الإبلاغ عن هذا المنظم';
+
+  @override
+  String get loginToContinue => 'سجل الدخول للمتابعة';
 }

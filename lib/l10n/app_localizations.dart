@@ -633,6 +633,534 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Les listes s\'affichent dès que le serveur Dowra répond.'**
   String get emptyReferentials;
+
+  /// No description provided for @chooseWilayaTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ta wilaya'**
+  String get chooseWilayaTitle;
+
+  /// No description provided for @allAlgeria.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toute l\'Algérie'**
+  String get allAlgeria;
+
+  /// No description provided for @weekendTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce week-end'**
+  String get weekendTitle;
+
+  /// No description provided for @featuredTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'À la une'**
+  String get featuredTitle;
+
+  /// No description provided for @gemsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trésors cachés'**
+  String get gemsTitle;
+
+  /// No description provided for @newTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveautés'**
+  String get newTitle;
+
+  /// No description provided for @wilayaOfDay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Wilaya du jour'**
+  String get wilayaOfDay;
+
+  /// No description provided for @seeOutingsIn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les sorties de {wilaya}'**
+  String seeOutingsIn(String wilaya);
+
+  /// No description provided for @priceFrom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dès {price}'**
+  String priceFrom(String price);
+
+  /// No description provided for @free.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gratuit'**
+  String get free;
+
+  /// No description provided for @badgeFeatured.
+  ///
+  /// In fr, this message translates to:
+  /// **'À la une'**
+  String get badgeFeatured;
+
+  /// No description provided for @badgeGem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trésor caché'**
+  String get badgeGem;
+
+  /// No description provided for @verified.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifié'**
+  String get verified;
+
+  /// No description provided for @distanceKm.
+  ///
+  /// In fr, this message translates to:
+  /// **'{km} km'**
+  String distanceKm(String km);
+
+  /// No description provided for @searchOutings.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom, lieu, artiste, organisateur…'**
+  String get searchOutings;
+
+  /// No description provided for @filters.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtres'**
+  String get filters;
+
+  /// No description provided for @apply.
+  ///
+  /// In fr, this message translates to:
+  /// **'Appliquer'**
+  String get apply;
+
+  /// No description provided for @reset.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout effacer'**
+  String get reset;
+
+  /// No description provided for @resultsCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 sortie} other{{count} sorties}}'**
+  String resultsCount(int count);
+
+  /// No description provided for @noResults.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune sortie ne correspond. Essaie d\'élargir les dates ou la wilaya.'**
+  String get noResults;
+
+  /// No description provided for @listView.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liste'**
+  String get listView;
+
+  /// No description provided for @mapView.
+  ///
+  /// In fr, this message translates to:
+  /// **'Carte'**
+  String get mapView;
+
+  /// No description provided for @nearMe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Près de moi'**
+  String get nearMe;
+
+  /// No description provided for @nearMeError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Position indisponible : autorise la localisation dans les réglages.'**
+  String get nearMeError;
+
+  /// No description provided for @whenToday.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aujourd\'hui'**
+  String get whenToday;
+
+  /// No description provided for @whenTomorrow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demain'**
+  String get whenTomorrow;
+
+  /// No description provided for @whenWeekend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce week-end'**
+  String get whenWeekend;
+
+  /// No description provided for @whenWeek.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette semaine'**
+  String get whenWeek;
+
+  /// No description provided for @whenMonth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce mois'**
+  String get whenMonth;
+
+  /// No description provided for @priceFree.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gratuit'**
+  String get priceFree;
+
+  /// No description provided for @priceUnder2000.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moins de 2 000 DA'**
+  String get priceUnder2000;
+
+  /// No description provided for @family.
+  ///
+  /// In fr, this message translates to:
+  /// **'En famille'**
+  String get family;
+
+  /// No description provided for @women.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entre femmes'**
+  String get women;
+
+  /// No description provided for @pmr.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accessible PMR'**
+  String get pmr;
+
+  /// No description provided for @hiddenGem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trésor caché'**
+  String get hiddenGem;
+
+  /// No description provided for @indoor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Intérieur'**
+  String get indoor;
+
+  /// No description provided for @outdoor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plein air'**
+  String get outdoor;
+
+  /// No description provided for @anyValue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous'**
+  String get anyValue;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trier par'**
+  String get sortBy;
+
+  /// No description provided for @sortDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date'**
+  String get sortDate;
+
+  /// No description provided for @sortPopular.
+  ///
+  /// In fr, this message translates to:
+  /// **'Popularité'**
+  String get sortPopular;
+
+  /// No description provided for @sortPriceAsc.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix croissant'**
+  String get sortPriceAsc;
+
+  /// No description provided for @sortDistance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Distance'**
+  String get sortDistance;
+
+  /// No description provided for @when.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quand'**
+  String get when;
+
+  /// No description provided for @price.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix'**
+  String get price;
+
+  /// No description provided for @setting.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cadre'**
+  String get setting;
+
+  /// No description provided for @category.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envie'**
+  String get category;
+
+  /// No description provided for @type.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type de sortie'**
+  String get type;
+
+  /// No description provided for @sessions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dates et séances'**
+  String get sessions;
+
+  /// No description provided for @noSessions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune séance à venir pour le moment.'**
+  String get noSessions;
+
+  /// No description provided for @tickets.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billets'**
+  String get tickets;
+
+  /// No description provided for @placesCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 place} other{{count} places}}'**
+  String placesCount(int count);
+
+  /// No description provided for @pickups.
+  ///
+  /// In fr, this message translates to:
+  /// **'Points de ramassage'**
+  String get pickups;
+
+  /// No description provided for @details.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les infos utiles'**
+  String get details;
+
+  /// No description provided for @program.
+  ///
+  /// In fr, this message translates to:
+  /// **'Programme'**
+  String get program;
+
+  /// No description provided for @includes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compris'**
+  String get includes;
+
+  /// No description provided for @place.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lieu'**
+  String get place;
+
+  /// No description provided for @meetingPoint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Point de rendez-vous'**
+  String get meetingPoint;
+
+  /// No description provided for @directions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Itinéraire'**
+  String get directions;
+
+  /// No description provided for @organizer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Organisateur'**
+  String get organizer;
+
+  /// No description provided for @followersCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 abonné} other{{count} abonnés}}'**
+  String followersCount(int count);
+
+  /// No description provided for @follow.
+  ///
+  /// In fr, this message translates to:
+  /// **'S\'abonner'**
+  String get follow;
+
+  /// No description provided for @following.
+  ///
+  /// In fr, this message translates to:
+  /// **'Abonné'**
+  String get following;
+
+  /// No description provided for @cancellation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annulation'**
+  String get cancellation;
+
+  /// No description provided for @saleMode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vente'**
+  String get saleMode;
+
+  /// No description provided for @maxPerPerson.
+  ///
+  /// In fr, this message translates to:
+  /// **'Maximum {count} billets par personne'**
+  String maxPerPerson(int count);
+
+  /// No description provided for @ageMin.
+  ///
+  /// In fr, this message translates to:
+  /// **'À partir de {age} ans'**
+  String ageMin(int age);
+
+  /// No description provided for @weatherForecast.
+  ///
+  /// In fr, this message translates to:
+  /// **'Météo prévue'**
+  String get weatherForecast;
+
+  /// No description provided for @rainChance.
+  ///
+  /// In fr, this message translates to:
+  /// **'{chance} % de pluie'**
+  String rainChance(int chance);
+
+  /// No description provided for @share.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager'**
+  String get share;
+
+  /// No description provided for @report.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler'**
+  String get report;
+
+  /// No description provided for @reportTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler cette sortie'**
+  String get reportTitle;
+
+  /// No description provided for @reportReason.
+  ///
+  /// In fr, this message translates to:
+  /// **'Motif'**
+  String get reportReason;
+
+  /// No description provided for @reportDetails.
+  ///
+  /// In fr, this message translates to:
+  /// **'Précisions (facultatif)'**
+  String get reportDetails;
+
+  /// No description provided for @reportSend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer'**
+  String get reportSend;
+
+  /// No description provided for @reportSent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Merci, ton signalement est envoyé à l\'équipe Dowra.'**
+  String get reportSent;
+
+  /// No description provided for @favoriteAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouté à tes favoris'**
+  String get favoriteAdded;
+
+  /// No description provided for @favoriteRemoved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retiré de tes favoris'**
+  String get favoriteRemoved;
+
+  /// No description provided for @similar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dans le même esprit'**
+  String get similar;
+
+  /// No description provided for @cancelledEvent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette sortie est annulée.'**
+  String get cancelledEvent;
+
+  /// No description provided for @endedEvent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette sortie est terminée.'**
+  String get endedEvent;
+
+  /// No description provided for @upcomingOutings.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ses prochaines sorties'**
+  String get upcomingOutings;
+
+  /// No description provided for @noUpcoming.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas de sortie à venir pour le moment.'**
+  String get noUpcoming;
+
+  /// No description provided for @pastOutings.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucune sortie passée} =1{1 sortie passée} other{{count} sorties passées}}'**
+  String pastOutings(int count);
+
+  /// No description provided for @about.
+  ///
+  /// In fr, this message translates to:
+  /// **'À propos'**
+  String get about;
+
+  /// No description provided for @contact.
+  ///
+  /// In fr, this message translates to:
+  /// **'Contact'**
+  String get contact;
+
+  /// No description provided for @reportOrganizer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler cet organisateur'**
+  String get reportOrganizer;
+
+  /// No description provided for @loginToContinue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connecte-toi pour continuer'**
+  String get loginToContinue;
 }
 
 class _AppLocalizationsDelegate

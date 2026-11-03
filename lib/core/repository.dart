@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'api.dart';
+import 'catalogue.dart';
 import 'models.dart';
 import 'storage.dart';
 
@@ -71,4 +72,53 @@ class DowraRepository {
   Future<List<OutingType>> outingTypes() => _list('/outing-types', OutingType.fromJson);
   Future<List<Category>> categories() => _list('/categories', Category.fromJson);
   Future<List<Wilaya>> wilayas() => _list('/wilayas', Wilaya.fromJson);
+
+  // ── Catalogue ──
+
+  Future<HomeData> home({int? wilaya}) => _call(() async {
+        final res = await _dio.get('/home', queryParameters: {'wilaya': ?wilaya});
+        return HomeData.fromJson(res.data['data'] as Map<String, dynamic>);
+      });
+
+  /// Une page de l'agenda (12 sorties) et le nombre de pages.
+  Future<({List<EventCard> events, int total, int lastPage})> events(EventFilters filters, {int page = 1}) => _call(() async {
+        final res = await _dio.get('/events', queryParameters: {...filters.toQuery(), 'page': page});
+        final meta = res.data['meta'] as Map<String, dynamic>;
+        return (
+          events: [for (final item in res.data['data'] as List) EventCard.fromJson(item as Map<String, dynamic>)],
+          total: meta['total'] as int,
+          lastPage: meta['last_page'] as int,
+        );
+      });
+
+  Future<List<MapPoint>> mapPoints(EventFilters filters) => _list('/events/map?${Uri(queryParameters: filters.toQuery().map((k, v) => MapEntry(k, '$v'))).query}', MapPoint.fromJson);
+
+  Future<EventDetail> event(String slug) => _call(() async {
+        final res = await _dio.get('/events/${Uri.encodeComponent(slug)}');
+        return EventDetail.fromJson(res.data['data'] as Map<String, dynamic>);
+      });
+
+  Future<List<EventCard>> similar(String slug) => _list('/events/${Uri.encodeComponent(slug)}/similar', EventCard.fromJson);
+
+  Future<OrganizerPage> organizer(String slug) => _call(() async {
+        final res = await _dio.get('/organizers/${Uri.encodeComponent(slug)}');
+        return OrganizerPage.fromJson(res.data['data'] as Map<String, dynamic>);
+      });
+
+  Future<List<EventCard>> favorites() => _list('/me/favorites', EventCard.fromJson);
+
+  Future<bool> setFavorite(String slug, bool favorite) => _call(() async {
+        final path = '/events/${Uri.encodeComponent(slug)}/favorite';
+        final res = favorite ? await _dio.post(path) : await _dio.delete(path);
+        return res.data['data']['is_favorite'] as bool;
+      });
+
+  Future<({bool following, int followers})> setFollow(String slug, bool follow) => _call(() async {
+        final path = '/organizers/${Uri.encodeComponent(slug)}/follow';
+        final res = follow ? await _dio.post(path) : await _dio.delete(path);
+        return (following: res.data['data']['is_following'] as bool, followers: res.data['data']['followers_count'] as int);
+      });
+
+  Future<void> report({required String type, required String slug, required String reason, String? details}) =>
+      _call(() => _dio.post('/reports', data: {'type': type, 'slug': slug, 'reason': reason, if (details != null && details.isNotEmpty) 'details': details}));
 }

@@ -292,4 +292,315 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emptyReferentials =>
       'Lists appear as soon as the Dowra server responds.';
+
+  @override
+  String get chooseWilayaTitle => 'Your wilaya';
+
+  @override
+  String get allAlgeria => 'All of Algeria';
+
+  @override
+  String get weekendTitle => 'This weekend';
+
+  @override
+  String get featuredTitle => 'Featured';
+
+  @override
+  String get gemsTitle => 'Hidden gems';
+
+  @override
+  String get newTitle => 'New';
+
+  @override
+  String get wilayaOfDay => 'Wilaya of the day';
+
+  @override
+  String seeOutingsIn(String wilaya) {
+    return 'Outings in $wilaya';
+  }
+
+  @override
+  String priceFrom(String price) {
+    return 'From $price';
+  }
+
+  @override
+  String get free => 'Free';
+
+  @override
+  String get badgeFeatured => 'Featured';
+
+  @override
+  String get badgeGem => 'Hidden gem';
+
+  @override
+  String get verified => 'Verified';
+
+  @override
+  String distanceKm(String km) {
+    return '$km km';
+  }
+
+  @override
+  String get searchOutings => 'Name, place, artist, organiser…';
+
+  @override
+  String get filters => 'Filters';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get reset => 'Clear all';
+
+  @override
+  String resultsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count outings',
+      one: '1 outing',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noResults =>
+      'No outing matches. Try wider dates or another wilaya.';
+
+  @override
+  String get listView => 'List';
+
+  @override
+  String get mapView => 'Map';
+
+  @override
+  String get nearMe => 'Near me';
+
+  @override
+  String get nearMeError => 'Location unavailable: allow location in settings.';
+
+  @override
+  String get whenToday => 'Today';
+
+  @override
+  String get whenTomorrow => 'Tomorrow';
+
+  @override
+  String get whenWeekend => 'This weekend';
+
+  @override
+  String get whenWeek => 'This week';
+
+  @override
+  String get whenMonth => 'This month';
+
+  @override
+  String get priceFree => 'Free';
+
+  @override
+  String get priceUnder2000 => 'Under 2,000 DA';
+
+  @override
+  String get family => 'Family';
+
+  @override
+  String get women => 'Women only';
+
+  @override
+  String get pmr => 'Wheelchair accessible';
+
+  @override
+  String get hiddenGem => 'Hidden gem';
+
+  @override
+  String get indoor => 'Indoor';
+
+  @override
+  String get outdoor => 'Outdoor';
+
+  @override
+  String get anyValue => 'All';
+
+  @override
+  String get sortBy => 'Sort by';
+
+  @override
+  String get sortDate => 'Date';
+
+  @override
+  String get sortPopular => 'Popularity';
+
+  @override
+  String get sortPriceAsc => 'Price, low to high';
+
+  @override
+  String get sortDistance => 'Distance';
+
+  @override
+  String get when => 'When';
+
+  @override
+  String get price => 'Price';
+
+  @override
+  String get setting => 'Setting';
+
+  @override
+  String get category => 'Mood';
+
+  @override
+  String get type => 'Kind of outing';
+
+  @override
+  String get sessions => 'Dates and times';
+
+  @override
+  String get noSessions => 'No upcoming date for now.';
+
+  @override
+  String get tickets => 'Tickets';
+
+  @override
+  String placesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count places',
+      one: '1 place',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pickups => 'Pick-up points';
+
+  @override
+  String get details => 'Good to know';
+
+  @override
+  String get program => 'Programme';
+
+  @override
+  String get includes => 'Included';
+
+  @override
+  String get place => 'Place';
+
+  @override
+  String get meetingPoint => 'Meeting point';
+
+  @override
+  String get directions => 'Directions';
+
+  @override
+  String get organizer => 'Organiser';
+
+  @override
+  String followersCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count followers',
+      one: '1 follower',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get follow => 'Follow';
+
+  @override
+  String get following => 'Following';
+
+  @override
+  String get cancellation => 'Cancellation';
+
+  @override
+  String get saleMode => 'Sales';
+
+  @override
+  String maxPerPerson(int count) {
+    return 'Up to $count tickets per person';
+  }
+
+  @override
+  String ageMin(int age) {
+    return 'Ages $age and up';
+  }
+
+  @override
+  String get weatherForecast => 'Weather forecast';
+
+  @override
+  String rainChance(int chance) {
+    return '$chance% chance of rain';
+  }
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get report => 'Report';
+
+  @override
+  String get reportTitle => 'Report this outing';
+
+  @override
+  String get reportReason => 'Reason';
+
+  @override
+  String get reportDetails => 'Details (optional)';
+
+  @override
+  String get reportSend => 'Send';
+
+  @override
+  String get reportSent =>
+      'Thanks, your report has been sent to the Dowra team.';
+
+  @override
+  String get favoriteAdded => 'Added to your favourites';
+
+  @override
+  String get favoriteRemoved => 'Removed from your favourites';
+
+  @override
+  String get similar => 'In the same spirit';
+
+  @override
+  String get cancelledEvent => 'This outing is cancelled.';
+
+  @override
+  String get endedEvent => 'This outing has ended.';
+
+  @override
+  String get upcomingOutings => 'Upcoming outings';
+
+  @override
+  String get noUpcoming => 'No upcoming outing for now.';
+
+  @override
+  String pastOutings(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count past outings',
+      one: '1 past outing',
+      zero: 'No past outings',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get reportOrganizer => 'Report this organiser';
+
+  @override
+  String get loginToContinue => 'Log in to continue';
 }

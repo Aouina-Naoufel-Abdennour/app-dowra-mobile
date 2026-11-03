@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- API Dowra. -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- « Près de moi » : position approximative ou précise, seulement quand l'app est ouverte. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:label="Dowra"
         android:name="${applicationName}"
