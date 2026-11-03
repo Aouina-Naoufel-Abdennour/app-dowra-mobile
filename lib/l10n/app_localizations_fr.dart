@@ -606,4 +606,315 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get loginToContinue => 'Connecte-toi pour continuer';
+
+  @override
+  String get addToCalendar => 'Ajouter au calendrier';
+
+  @override
+  String alreadyBooked(int count) {
+    return '$count déjà réservé(s)';
+  }
+
+  @override
+  String get bookChannel => 'Comment veux-tu réserver ?';
+
+  @override
+  String get bookChoose => 'Choisis au moins un billet.';
+
+  @override
+  String get bookConfirmFree => 'Confirmer mon inscription';
+
+  @override
+  String get bookGroup => 'Sortir à plusieurs';
+
+  @override
+  String get bookGroupText =>
+      'Crée un lien de groupe et partage-le : chacun réserve sa place, ou tu paies pour tout le monde et chacun récupère son billet.';
+
+  @override
+  String get bookHoldInfo =>
+      'Tes places sont bloquées 10 minutes pendant le paiement.';
+
+  @override
+  String bookHolder(int n) {
+    return 'Participant $n';
+  }
+
+  @override
+  String get bookHolders => 'Noms des participants';
+
+  @override
+  String get bookHoldersHint =>
+      'Billets nominatifs : le nom de chaque participant est contrôlé à l\'entrée.';
+
+  @override
+  String get bookNotAvailable =>
+      'Cette sortie ne prend pas encore de réservation sur Dowra.';
+
+  @override
+  String get bookNote => 'Un message pour l\'organisateur (facultatif)';
+
+  @override
+  String get bookOnline => 'Billet payé en ligne';
+
+  @override
+  String get bookOnlineHint =>
+      'CIB ou Edahabia : ta place est garantie tout de suite.';
+
+  @override
+  String get bookOptions => 'Options';
+
+  @override
+  String bookPay(String amount) {
+    return 'Payer $amount';
+  }
+
+  @override
+  String get bookSendRequest => 'Envoyer la demande';
+
+  @override
+  String get bookSession => 'Choisis ta séance';
+
+  @override
+  String get bookSimple => 'Réservation simple';
+
+  @override
+  String get bookSimpleHint => 'L\'organisateur confirme sous 48 heures.';
+
+  @override
+  String get bookTitle => 'Réserver';
+
+  @override
+  String get callOrganizer => 'Appeler l\'organisateur';
+
+  @override
+  String get cancelBooking => 'Annuler la réservation';
+
+  @override
+  String get cancelBookingConfirm => 'Oui, annuler';
+
+  @override
+  String get cancelBookingText =>
+      'Les billets seront annulés et le paiement en ligne remboursé selon la règle de l\'organisateur.';
+
+  @override
+  String cancelledBy(String who) {
+    return 'Annulée par : $who';
+  }
+
+  @override
+  String get claimShare => 'Envoyer le lien du billet';
+
+  @override
+  String depositToPay(String amount) {
+    return 'Acompte à régler : $amount';
+  }
+
+  @override
+  String get entryDeadline => 'Entrée jusqu\'à';
+
+  @override
+  String get findOuting => 'Trouver une sortie';
+
+  @override
+  String get fromPrice => 'À partir de';
+
+  @override
+  String fromWaitlist(String time) {
+    return 'Place proposée par la liste d\'attente : paie-la avant $time.';
+  }
+
+  @override
+  String get groupEach => 'Chacun paie sa part';
+
+  @override
+  String get groupOne => 'Je paie pour tout le monde';
+
+  @override
+  String get groupShare => 'Lien du groupe';
+
+  @override
+  String get notCancellable =>
+      'Selon la règle de l\'organisateur, cette réservation ne peut plus être annulée.';
+
+  @override
+  String payBefore(String time) {
+    return 'Places bloquées jusqu\'à $time';
+  }
+
+  @override
+  String payNow(String amount) {
+    return 'Payer $amount';
+  }
+
+  @override
+  String get paymentMethod => 'Paiement';
+
+  @override
+  String get placesAvailable => 'Places disponibles';
+
+  @override
+  String placesLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count places restantes',
+      one: '1 place restante',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get qrHint =>
+      'Présente ce QR code à l\'entrée. Il reste visible sans réseau.';
+
+  @override
+  String get refund => 'Remboursement';
+
+  @override
+  String get scanAdmitted => 'Entrées';
+
+  @override
+  String get scanAlreadyUsed => 'Déjà utilisé';
+
+  @override
+  String get scanCameraError =>
+      'Caméra indisponible : saisis le code du billet ci-dessous.';
+
+  @override
+  String get scanCancelled => 'Billet annulé';
+
+  @override
+  String get scanCheck => 'Vérifier';
+
+  @override
+  String get scanChoose =>
+      'Choisis la séance à contrôler. La liste des billets est téléchargée pour scanner même sans réseau.';
+
+  @override
+  String get scanHint => 'Vise le QR code du billet, ou saisis son code.';
+
+  @override
+  String get scanManual => 'Code du billet';
+
+  @override
+  String get scanMode => 'Mode scan';
+
+  @override
+  String get scanNoSession =>
+      'Aucune séance à contrôler dans les 7 prochains jours.';
+
+  @override
+  String get scanOffline => 'Hors connexion';
+
+  @override
+  String get scanOnline => 'Synchronisé';
+
+  @override
+  String scanPending(int count) {
+    return '$count scan(s) à envoyer';
+  }
+
+  @override
+  String get scanSync => 'Synchroniser';
+
+  @override
+  String scanSyncedAt(String date) {
+    return 'Dernière synchronisation : $date';
+  }
+
+  @override
+  String get scanUnknown => 'Billet inconnu';
+
+  @override
+  String get scanValid => 'Billet valide';
+
+  @override
+  String scannedOn(String date) {
+    return 'Scanné le $date';
+  }
+
+  @override
+  String get soldOut => 'Complet';
+
+  @override
+  String get soldOutWaitlist => 'Complet · liste d\'attente';
+
+  @override
+  String get ticketTitle => 'Billet';
+
+  @override
+  String ticketsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count billets',
+      one: '1 billet',
+      zero: 'Aucun billet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ticketsEmptyPast => 'Pas encore de sortie passée.';
+
+  @override
+  String get ticketsPast => 'Passés';
+
+  @override
+  String get ticketsUpcoming => 'À venir';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get transferLink => 'Ou envoyer un lien';
+
+  @override
+  String get transferName => 'Son nom (facultatif)';
+
+  @override
+  String get transferPhone => 'Numéro de ton ami';
+
+  @override
+  String get transferSend => 'Transférer';
+
+  @override
+  String get transferTicket => 'Transférer à un ami';
+
+  @override
+  String transferredFrom(String name) {
+    return 'Offert par $name';
+  }
+
+  @override
+  String transferredTo(String name) {
+    return 'Transféré à $name';
+  }
+
+  @override
+  String waitingOrganizer(String date) {
+    return 'En attente de l\'organisateur : réponse avant $date.';
+  }
+
+  @override
+  String get waitlistJoin => 'M\'inscrire sur la liste d\'attente';
+
+  @override
+  String get waitlistJoined =>
+      'Tu es sur la liste d\'attente. On te prévient dès qu\'une place se libère.';
+
+  @override
+  String get waitlistLeave => 'Quitter';
+
+  @override
+  String get waitlistOffered =>
+      'Une place t\'attend : paie-la dans « Mes billets ».';
+
+  @override
+  String get waitlistOn => 'Tu es sur la liste d\'attente.';
+
+  @override
+  String get offlineCopy =>
+      'Hors connexion : tes billets gardés sur le téléphone.';
 }

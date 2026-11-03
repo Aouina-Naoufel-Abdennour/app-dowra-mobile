@@ -595,4 +595,306 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get loginToContinue => 'سجل الدخول للمتابعة';
+
+  @override
+  String get addToCalendar => 'أضف إلى التقويم';
+
+  @override
+  String alreadyBooked(int count) {
+    return '$count محجوزة مسبقًا';
+  }
+
+  @override
+  String get bookChannel => 'كيف تريد الحجز؟';
+
+  @override
+  String get bookChoose => 'اختر تذكرة واحدة على الأقل.';
+
+  @override
+  String get bookConfirmFree => 'تأكيد التسجيل';
+
+  @override
+  String get bookGroup => 'اخرج مع أصدقائك';
+
+  @override
+  String get bookGroupText =>
+      'أنشئ رابط مجموعة وشاركه: كل واحد يحجز مكانه، أو تدفع للجميع وكل واحد يستلم تذكرته.';
+
+  @override
+  String get bookHoldInfo => 'أماكنك محجوزة لمدة 10 دقائق أثناء الدفع.';
+
+  @override
+  String bookHolder(int n) {
+    return 'المشارك $n';
+  }
+
+  @override
+  String get bookHolders => 'أسماء المشاركين';
+
+  @override
+  String get bookHoldersHint =>
+      'تذاكر اسمية: يُتحقق من اسم كل مشارك عند الدخول.';
+
+  @override
+  String get bookNotAvailable => 'هذه الخرجة لا تقبل الحجز على دورة حاليًا.';
+
+  @override
+  String get bookNote => 'رسالة للمنظّم (اختياري)';
+
+  @override
+  String get bookOnline => 'تذكرة مدفوعة عبر الإنترنت';
+
+  @override
+  String get bookOnlineHint => 'CIB أو الذهبية: مكانك مضمون فورًا.';
+
+  @override
+  String get bookOptions => 'خيارات';
+
+  @override
+  String bookPay(String amount) {
+    return 'ادفع $amount';
+  }
+
+  @override
+  String get bookSendRequest => 'إرسال الطلب';
+
+  @override
+  String get bookSession => 'اختر الحصة';
+
+  @override
+  String get bookSimple => 'حجز بسيط';
+
+  @override
+  String get bookSimpleHint => 'يؤكد المنظّم خلال 48 ساعة.';
+
+  @override
+  String get bookTitle => 'احجز';
+
+  @override
+  String get callOrganizer => 'اتصل بالمنظّم';
+
+  @override
+  String get cancelBooking => 'إلغاء الحجز';
+
+  @override
+  String get cancelBookingConfirm => 'نعم، ألغِ';
+
+  @override
+  String get cancelBookingText =>
+      'ستُلغى التذاكر ويُسترجع الدفع حسب قاعدة المنظّم.';
+
+  @override
+  String cancelledBy(String who) {
+    return 'ألغاه: $who';
+  }
+
+  @override
+  String get claimShare => 'أرسل رابط التذكرة';
+
+  @override
+  String depositToPay(String amount) {
+    return 'العربون المطلوب: $amount';
+  }
+
+  @override
+  String get entryDeadline => 'الدخول حتى';
+
+  @override
+  String get findOuting => 'ابحث عن خرجة';
+
+  @override
+  String get fromPrice => 'ابتداءً من';
+
+  @override
+  String fromWaitlist(String time) {
+    return 'مكان من قائمة الانتظار: ادفعه قبل $time.';
+  }
+
+  @override
+  String get groupEach => 'كل واحد يدفع حصته';
+
+  @override
+  String get groupOne => 'أدفع للجميع';
+
+  @override
+  String get groupShare => 'رابط المجموعة';
+
+  @override
+  String get notCancellable =>
+      'حسب قاعدة المنظّم، لم يعد ممكنًا إلغاء هذا الحجز.';
+
+  @override
+  String payBefore(String time) {
+    return 'الأماكن محجوزة حتى $time';
+  }
+
+  @override
+  String payNow(String amount) {
+    return 'ادفع $amount';
+  }
+
+  @override
+  String get paymentMethod => 'الدفع';
+
+  @override
+  String get placesAvailable => 'أماكن متاحة';
+
+  @override
+  String placesLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count أماكن متبقية',
+      one: 'مكان واحد متبقٍ',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get qrHint => 'اعرض رمز QR هذا عند الدخول. يبقى ظاهرًا دون إنترنت.';
+
+  @override
+  String get refund => 'الاسترجاع';
+
+  @override
+  String get scanAdmitted => 'الدخول';
+
+  @override
+  String get scanAlreadyUsed => 'مستعملة من قبل';
+
+  @override
+  String get scanCameraError => 'الكاميرا غير متاحة: أدخل رمز التذكرة أدناه.';
+
+  @override
+  String get scanCancelled => 'تذكرة ملغاة';
+
+  @override
+  String get scanCheck => 'تحقق';
+
+  @override
+  String get scanChoose =>
+      'اختر الحصة. تُحمَّل قائمة التذاكر للمسح حتى دون إنترنت.';
+
+  @override
+  String get scanHint => 'وجّه الكاميرا نحو رمز QR أو أدخل الرمز.';
+
+  @override
+  String get scanManual => 'رمز التذكرة';
+
+  @override
+  String get scanMode => 'وضع المسح';
+
+  @override
+  String get scanNoSession => 'لا توجد حصص للمراقبة خلال 7 أيام القادمة.';
+
+  @override
+  String get scanOffline => 'دون اتصال';
+
+  @override
+  String get scanOnline => 'متزامن';
+
+  @override
+  String scanPending(int count) {
+    return '$count مسح للإرسال';
+  }
+
+  @override
+  String get scanSync => 'مزامنة';
+
+  @override
+  String scanSyncedAt(String date) {
+    return 'آخر مزامنة: $date';
+  }
+
+  @override
+  String get scanUnknown => 'تذكرة غير معروفة';
+
+  @override
+  String get scanValid => 'تذكرة صالحة';
+
+  @override
+  String scannedOn(String date) {
+    return 'مُسحت في $date';
+  }
+
+  @override
+  String get soldOut => 'مكتمل';
+
+  @override
+  String get soldOutWaitlist => 'مكتمل · قائمة الانتظار';
+
+  @override
+  String get ticketTitle => 'التذكرة';
+
+  @override
+  String ticketsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count تذاكر',
+      one: 'تذكرة واحدة',
+      zero: 'لا تذكرة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ticketsEmptyPast => 'لا توجد خرجات سابقة بعد.';
+
+  @override
+  String get ticketsPast => 'السابقة';
+
+  @override
+  String get ticketsUpcoming => 'القادمة';
+
+  @override
+  String get total => 'المجموع';
+
+  @override
+  String get transferLink => 'أو أرسل رابطًا';
+
+  @override
+  String get transferName => 'اسمه (اختياري)';
+
+  @override
+  String get transferPhone => 'رقم صديقك';
+
+  @override
+  String get transferSend => 'تحويل';
+
+  @override
+  String get transferTicket => 'حوّل إلى صديق';
+
+  @override
+  String transferredFrom(String name) {
+    return 'هدية من $name';
+  }
+
+  @override
+  String transferredTo(String name) {
+    return 'حُوّلت إلى $name';
+  }
+
+  @override
+  String waitingOrganizer(String date) {
+    return 'في انتظار المنظّم: الرد قبل $date.';
+  }
+
+  @override
+  String get waitlistJoin => 'سجّلني في قائمة الانتظار';
+
+  @override
+  String get waitlistJoined => 'أنت في قائمة الانتظار. سنعلمك فور تحرّر مكان.';
+
+  @override
+  String get waitlistLeave => 'مغادرة';
+
+  @override
+  String get waitlistOffered => 'مكان ينتظرك: ادفعه في «تذاكري».';
+
+  @override
+  String get waitlistOn => 'أنت في قائمة الانتظار.';
+
+  @override
+  String get offlineCopy => 'دون اتصال: تذاكرك المحفوظة على الهاتف.';
 }

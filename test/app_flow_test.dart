@@ -1,14 +1,61 @@
 import 'package:dowra/app.dart';
+import 'package:dowra/core/api.dart';
+import 'package:dowra/core/bookings.dart';
 import 'package:dowra/core/catalogue.dart';
 import 'package:dowra/core/models.dart';
+import 'package:dowra/core/offline_store.dart';
 import 'package:dowra/core/providers.dart';
 import 'package:dowra/core/repository.dart';
+import 'package:dowra/screens/scan_screen.dart';
+import 'package:dowra/l10n/app_localizations.dart';
+import 'package:dowra/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockRepository extends Mock implements DowraRepository {}
+
+/// Stockage du téléphone en mémoire (billets hors connexion, listes de scan).
+class MemoryStore extends OfflineStore {
+  final Map<String, Object?> data = {};
+
+  @override
+  Future<Object?> readJson(String key) async => data[key];
+
+  @override
+  Future<void> writeJson(String key, Object? value) async => data[key] = value;
+
+  @override
+  Future<void> clear() async => data.clear();
+}
+
+Map<String, dynamic> bookingJson({String status = 'confirmee'}) => {
+      'code': 'DW7K3P9Q',
+      'status': {'value': status, 'label': status == 'confirmee' ? 'Confirmée' : 'En attente de paiement'},
+      'channel': 'en_ligne',
+      'is_buyer': true,
+      'event': {
+        'slug': 'chrea',
+        'title': 'Randonnée des cèdres de Chréa',
+        'cover': null,
+        'place': 'Chréa',
+        'wilaya': 'Blida',
+        'coordinates': null,
+        'organizer': {'slug': 'djazair-rando', 'name': 'Djazaïr Rando', 'phone': null},
+        'cancellation_policy': {'value': 'jusqua_48h', 'label': 'Remboursable jusqu\'à 48 heures avant'},
+      },
+      'session': {'id': 1, 'starts_at': '2026-11-06T07:30:00+01:00', 'label': null},
+      'items': [{'ticket_type_id': 1, 'name': 'Participation', 'quantity': 2, 'unit_price': 0}],
+      'options': [],
+      'total': 0,
+      'tickets': [
+        {'code': 'TABCDE2345', 'type': 'Participation', 'holder_name': 'Amina', 'status': {'value': 'valide', 'label': 'Valide'}, 'is_mine': true, 'qr': 'DOWRA:TABCDE2345:abcdefghijkl'},
+        {'code': 'TFGHJK6789', 'type': 'Participation', 'status': {'value': 'valide', 'label': 'Valide'}, 'is_mine': true, 'qr': 'DOWRA:TFGHJK6789:abcdefghijkl'},
+      ],
+      'can_cancel': true,
+      'calendar_url': 'http://localhost:8000/api/v1/bookings/DW7K3P9Q/calendar.ics',
+    };
 
 Map<String, dynamic> eventJson(String slug, String title) => {
       'id': slug.hashCode,
@@ -25,7 +72,7 @@ Map<String, dynamic> eventJson(String slug, String title) => {
       'labels': {'featured': true},
     };
 
-EventDetail detail() => EventDetail.fromJson({
+Map<String, dynamic> detailJson() => {
       ...eventJson('chrea', 'Randonnée des cèdres de Chréa'),
       'description': 'Douze kilomètres sous les cèdres.',
       'media': [],
@@ -43,7 +90,9 @@ EventDetail detail() => EventDetail.fromJson({
       'setting': {'label': 'Plein air'},
       'is_favorite': false,
       'share_url': 'http://localhost:3000/fr/sorties/chrea',
-    });
+    };
+
+EventDetail detail() => EventDetail.fromJson(detailJson());
 
 DowraUser user({String? name, bool onboarded = false}) => DowraUser.fromJson({
       'id': 1,
@@ -62,11 +111,13 @@ DowraUser user({String? name, bool onboarded = false}) => DowraUser.fromJson({
 
 void main() {
   late MockRepository repository;
+  late MemoryStore store;
 
   setUpAll(() => registerFallbackValue(const EventFilters()));
 
   setUp(() {
     repository = MockRepository();
+    store = MemoryStore();
     when(() => repository.currentUser()).thenAnswer((_) async => null);
     when(() => repository.outingTypes()).thenAnswer((_) async => [
           const OutingType(slug: 'randonnee', name: 'Randonnées et nature', bookingLabel: 'Une place dans un groupe', icon: 'mountain'),
@@ -95,6 +146,7 @@ void main() {
     await tester.pumpWidget(ProviderScope(
       overrides: [
         repositoryProvider.overrideWithValue(repository),
+        offlineStoreProvider.overrideWithValue(store),
         startupPrefsProvider.overrideWithValue(StartupPrefs(locale: 'fr', themeMode: null, introSeen: introSeen)),
       ],
       child: const DowraApp(),
@@ -194,5 +246,103 @@ void main() {
     expect(sent['interests'], ['nature']);
     expect(sent['onboarded'], true);
     expect(find.text('Salam Yacine,'), findsOneWidget);
+  });
+
+  testWidgets('réserver une inscription gratuite ouvre le billet avec ses QR codes', (tester) async {
+    final free = EventDetail.fromJson({
+      ...detailJson(),
+      'tickets': [{'id': 1, 'kind': 'inscription', 'name': 'Participation', 'price': 0, 'seats': 1, 'on_sale': true}],
+      'is_free': true,
+      'bookable': true,
+    });
+    when(() => repository.currentUser()).thenAnswer((_) async => user(name: 'Amina', onboarded: true));
+    when(() => repository.event('chrea')).thenAnswer((_) async => free);
+    when(() => repository.availability('chrea')).thenAnswer((_) async => Availability.fromJson({
+          'sessions': [{'id': 1, 'starts_at': '2026-11-06T07:30:00+01:00', 'capacity': 25, 'remaining': 25, 'sold_out': false, 'tickets_remaining': {'1': 25}, 'pickup_points': []}],
+          'max_per_person': 10,
+          'already_booked': 0,
+          'waitlist': [],
+        }));
+    when(() => repository.book(any())).thenAnswer((_) async => Booking.fromJson(bookingJson()));
+    when(() => repository.bookingJson('DW7K3P9Q')).thenAnswer((_) async => bookingJson());
+    when(() => repository.bookingsJson(any())).thenAnswer((_) async => [bookingJson()]);
+
+    await launch(tester, introSeen: true);
+    await tester.tap(find.text('Randonnée des cèdres de Chréa'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Réserver'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('+').first);
+    await tester.pump();
+    await tester.tap(find.byTooltip('+').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Confirmer mon inscription'));
+    await tester.pumpAndSettle();
+
+    final sent = verify(() => repository.book(captureAny())).captured.single as Map<String, Object?>;
+    expect(sent['items'], [{'ticket_type_id': 1, 'quantity': 2}]);
+    expect(find.text('DW7K3P9Q'), findsOneWidget);
+    expect(find.text('TABCDE2345'), findsOneWidget);
+    expect(store.data['dowra_offline_booking_DW7K3P9Q'], isNotNull);
+  });
+
+  testWidgets('sans réseau, Mes billets affiche la copie gardée sur le téléphone', (tester) async {
+    when(() => repository.currentUser()).thenAnswer((_) async => user(name: 'Amina', onboarded: true));
+    when(() => repository.bookingsJson(any())).thenThrow(ApiException('network'));
+    store.data['dowra_offline_bookings_upcoming'] = [bookingJson()];
+
+    await launch(tester, introSeen: true);
+    await tester.tap(find.bySemanticsLabel('Billets'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Hors connexion : tes billets gardés sur le téléphone.'), findsOneWidget);
+    expect(find.text('Randonnée des cèdres de Chréa'), findsOneWidget);
+    expect(find.text('2 billets'), findsOneWidget);
+  });
+
+  testWidgets('mode scan : vert, puis orange pour le même billet, rouge pour un inconnu, et envoi des scans', (tester) async {
+    when(() => repository.scanTickets(5)).thenAnswer((_) async => {
+          'session': {'id': 5, 'event': 'Nuit dans les dunes de Taghit'},
+          'downloaded_at': '2026-11-05T18:00:00+01:00',
+          'tickets': [
+            {'code': 'TABCDE2345', 'type': 'Place en tente', 'holder_name': 'Lina Bouzid', 'status': 'valide'},
+            {'code': 'TFGHJK6789', 'type': 'Place en tente', 'holder_name': 'Walid Cherif', 'status': 'annule'},
+          ],
+        });
+    when(() => repository.syncScans(5, any(), since: any(named: 'since'), device: any(named: 'device')))
+        .thenAnswer((_) async => {'tickets': [], 'synced_at': '2026-11-05T18:01:00+01:00'});
+
+    await tester.pumpWidget(ProviderScope(
+      overrides: [repositoryProvider.overrideWithValue(repository), offlineStoreProvider.overrideWithValue(store)],
+      child: MaterialApp(
+        theme: dowraTheme(brightness: Brightness.light, locale: 'fr'),
+        locale: const Locale('fr'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const ScanScreen(sessionId: 5, camera: false),
+      ),
+    ));
+    await tester.pumpAndSettle();
+
+    Future<void> scan(String code) async {
+      await tester.enterText(find.byType(TextField), code);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump(const Duration(seconds: 4));
+    }
+
+    await scan('DOWRA:TABCDE2345:abcdefghijkl');
+    expect(find.text('Billet valide'), findsOneWidget);
+    expect(find.text('1 / 1'), findsOneWidget);
+    await scan('TABCDE2345');
+    expect(find.text('Déjà utilisé'), findsOneWidget);
+    await scan('TFGHJK6789');
+    expect(find.text('Billet annulé'), findsOneWidget);
+    await scan('TZZZZZZZZZ');
+    expect(find.text('Billet inconnu'), findsOneWidget);
+
+    final sent = verify(() => repository.syncScans(5, captureAny(), since: any(named: 'since'), device: any(named: 'device'))).captured;
+    expect(sent.whereType<List>().expand((batch) => batch).map((scan) => (scan as Map)['code']), contains('DOWRA:TABCDE2345:abcdefghijkl'));
+    await tester.pumpWidget(const SizedBox());
   });
 }

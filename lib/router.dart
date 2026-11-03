@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'core/providers.dart';
+import 'screens/booking_screen.dart';
 import 'screens/code_screen.dart';
 import 'screens/event_screen.dart';
 import 'screens/explore_screen.dart';
@@ -13,8 +14,10 @@ import 'screens/organizer_screen.dart';
 import 'screens/phone_screen.dart';
 import 'screens/profile_edit_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/scan_screen.dart';
 import 'screens/shell.dart';
 import 'screens/splash_screen.dart';
+import 'screens/ticket_screen.dart';
 import 'screens/tickets_screen.dart';
 import 'screens/welcome_screen.dart';
 
@@ -63,6 +66,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/premiers-pas', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/profil/infos', builder: (_, _) => const ProfileEditScreen()),
       GoRoute(path: '/sorties/:slug', builder: (_, state) => EventScreen(slug: state.pathParameters['slug']!)),
+      GoRoute(path: '/sorties/:slug/reserver', builder: (_, state) => BookingScreen(slug: state.pathParameters['slug']!)),
+      GoRoute(path: '/billets/:code', builder: (_, state) => TicketScreen(code: state.pathParameters['code']!)),
+      GoRoute(path: '/scan', builder: (_, _) => const ScanSessionsScreen()),
+      GoRoute(path: '/scan/:session', builder: (_, state) => ScanScreen(sessionId: int.parse(state.pathParameters['session']!))),
       GoRoute(path: '/organisateurs/:slug', builder: (_, state) => OrganizerScreen(slug: state.pathParameters['slug']!)),
       StatefulShellRoute.indexedStack(
         builder: (_, _, shell) => DowraShell(shell: shell),

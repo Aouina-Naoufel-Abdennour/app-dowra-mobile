@@ -267,5 +267,201 @@
   "about": "À propos",
   "contact": "Contact",
   "reportOrganizer": "Signaler cet organisateur",
-  "loginToContinue": "Connecte-toi pour continuer"
+  "loginToContinue": "Connecte-toi pour continuer",
+  "addToCalendar": "Ajouter au calendrier",
+  "alreadyBooked": "{count} déjà réservé(s)",
+  "@alreadyBooked": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bookChannel": "Comment veux-tu réserver ?",
+  "bookChoose": "Choisis au moins un billet.",
+  "bookConfirmFree": "Confirmer mon inscription",
+  "bookGroup": "Sortir à plusieurs",
+  "bookGroupText": "Crée un lien de groupe et partage-le : chacun réserve sa place, ou tu paies pour tout le monde et chacun récupère son billet.",
+  "bookHoldInfo": "Tes places sont bloquées 10 minutes pendant le paiement.",
+  "bookHolder": "Participant {n}",
+  "@bookHolder": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "bookHolders": "Noms des participants",
+  "bookHoldersHint": "Billets nominatifs : le nom de chaque participant est contrôlé à l'entrée.",
+  "bookNotAvailable": "Cette sortie ne prend pas encore de réservation sur Dowra.",
+  "bookNote": "Un message pour l'organisateur (facultatif)",
+  "bookOnline": "Billet payé en ligne",
+  "bookOnlineHint": "CIB ou Edahabia : ta place est garantie tout de suite.",
+  "bookOptions": "Options",
+  "bookPay": "Payer {amount}",
+  "@bookPay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "bookSendRequest": "Envoyer la demande",
+  "bookSession": "Choisis ta séance",
+  "bookSimple": "Réservation simple",
+  "bookSimpleHint": "L'organisateur confirme sous 48 heures.",
+  "bookTitle": "Réserver",
+  "callOrganizer": "Appeler l'organisateur",
+  "cancelBooking": "Annuler la réservation",
+  "cancelBookingConfirm": "Oui, annuler",
+  "cancelBookingText": "Les billets seront annulés et le paiement en ligne remboursé selon la règle de l'organisateur.",
+  "cancelledBy": "Annulée par : {who}",
+  "@cancelledBy": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      }
+    }
+  },
+  "claimShare": "Envoyer le lien du billet",
+  "depositToPay": "Acompte à régler : {amount}",
+  "@depositToPay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "entryDeadline": "Entrée jusqu'à",
+  "findOuting": "Trouver une sortie",
+  "fromPrice": "À partir de",
+  "fromWaitlist": "Place proposée par la liste d'attente : paie-la avant {time}.",
+  "@fromWaitlist": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "groupEach": "Chacun paie sa part",
+  "groupOne": "Je paie pour tout le monde",
+  "groupShare": "Lien du groupe",
+  "notCancellable": "Selon la règle de l'organisateur, cette réservation ne peut plus être annulée.",
+  "payBefore": "Places bloquées jusqu'à {time}",
+  "@payBefore": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "payNow": "Payer {amount}",
+  "@payNow": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentMethod": "Paiement",
+  "placesAvailable": "Places disponibles",
+  "placesLeft": "{count, plural, =1{1 place restante} other{{count} places restantes}}",
+  "@placesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "qrHint": "Présente ce QR code à l'entrée. Il reste visible sans réseau.",
+  "refund": "Remboursement",
+  "scanAdmitted": "Entrées",
+  "scanAlreadyUsed": "Déjà utilisé",
+  "scanCameraError": "Caméra indisponible : saisis le code du billet ci-dessous.",
+  "scanCancelled": "Billet annulé",
+  "scanCheck": "Vérifier",
+  "scanChoose": "Choisis la séance à contrôler. La liste des billets est téléchargée pour scanner même sans réseau.",
+  "scanHint": "Vise le QR code du billet, ou saisis son code.",
+  "scanManual": "Code du billet",
+  "scanMode": "Mode scan",
+  "scanNoSession": "Aucune séance à contrôler dans les 7 prochains jours.",
+  "scanOffline": "Hors connexion",
+  "scanOnline": "Synchronisé",
+  "scanPending": "{count} scan(s) à envoyer",
+  "@scanPending": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanSync": "Synchroniser",
+  "scanSyncedAt": "Dernière synchronisation : {date}",
+  "@scanSyncedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "scanUnknown": "Billet inconnu",
+  "scanValid": "Billet valide",
+  "scannedOn": "Scanné le {date}",
+  "@scannedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "soldOut": "Complet",
+  "soldOutWaitlist": "Complet · liste d'attente",
+  "ticketTitle": "Billet",
+  "ticketsCount": "{count, plural, =0{Aucun billet} =1{1 billet} other{{count} billets}}",
+  "@ticketsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ticketsEmptyPast": "Pas encore de sortie passée.",
+  "ticketsPast": "Passés",
+  "ticketsUpcoming": "À venir",
+  "total": "Total",
+  "transferLink": "Ou envoyer un lien",
+  "transferName": "Son nom (facultatif)",
+  "transferPhone": "Numéro de ton ami",
+  "transferSend": "Transférer",
+  "transferTicket": "Transférer à un ami",
+  "transferredFrom": "Offert par {name}",
+  "@transferredFrom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "transferredTo": "Transféré à {name}",
+  "@transferredTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "waitingOrganizer": "En attente de l'organisateur : réponse avant {date}.",
+  "@waitingOrganizer": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "waitlistJoin": "M'inscrire sur la liste d'attente",
+  "waitlistJoined": "Tu es sur la liste d'attente. On te prévient dès qu'une place se libère.",
+  "waitlistLeave": "Quitter",
+  "waitlistOffered": "Une place t'attend : paie-la dans « Mes billets ».",
+  "waitlistOn": "Tu es sur la liste d'attente.",
+  "offlineCopy": "Hors connexion : tes billets gardés sur le téléphone."
 }

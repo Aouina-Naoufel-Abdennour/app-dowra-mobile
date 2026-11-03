@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'api.dart';
 import 'models.dart';
+import 'offline_store.dart';
 import 'repository.dart';
 import 'storage.dart';
 
@@ -12,6 +13,7 @@ const localeLabels = {'fr': 'Français', 'ar': 'العربية', 'en': 'English'
 
 final localPrefsProvider = Provider<LocalPrefs>((ref) => LocalPrefs());
 final tokenStorageProvider = Provider<TokenStorage>((ref) => TokenStorage());
+final offlineStoreProvider = Provider<OfflineStore>((ref) => OfflineStore());
 
 /// Préférences lues au démarrage (avant le premier écran), passées par main.dart.
 class StartupPrefs {
@@ -137,11 +139,13 @@ class SessionNotifier extends AsyncNotifier<DowraUser?> {
 
   Future<void> logout() async {
     await ref.read(repositoryProvider).logout();
+    await ref.read(offlineStoreProvider).clear();
     state = const AsyncData(null);
   }
 
   Future<void> deleteAccount() async {
     await ref.read(repositoryProvider).deleteAccount();
+    await ref.read(offlineStoreProvider).clear();
     state = const AsyncData(null);
   }
 }

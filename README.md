@@ -4,7 +4,7 @@ Application Flutter de **Dowra** pour iOS et Android (et version web pour les te
 
 | Identifiant | `dz.dowra.app` |
 |---|---|
-| **Versions** | Flutter 3.47 (Dart 3.13), Riverpod 3, go_router 18, Dio 5, flutter_secure_storage 11, flutter_map (OpenStreetMap), geolocator, share_plus, textes en ARB (fr, ar, en) |
+| **Versions** | Flutter 3.47 (Dart 3.13), Riverpod 3, go_router 18, Dio 5, flutter_secure_storage 11, flutter_map (OpenStreetMap), geolocator, share_plus, qr_flutter, mobile_scanner, shared_preferences, textes en ARB (fr, ar, en) |
 | **Polices intégrées** | Plus Jakarta Sans, Caveat, Noto Kufi Arabic |
 
 ## Démarrer (Android Studio ou terminal)
@@ -48,6 +48,9 @@ Un autre numéro mobile (05, 06 ou 07) crée un nouveau compte et ouvre le premi
 | Informations personnelles | `/profil/infos` |
 | Fiche d'une sortie | `/sorties/:slug` |
 | Page organisateur | `/organisateurs/:slug` |
+| Réserver | `/sorties/:slug/reserver` |
+| Billet (QR codes) | `/billets/:code` |
+| Mode scan | `/scan`, `/scan/:session` |
 
 Sans compte, l'accueil, Explorer, les fiches et les pages organisateurs restent ouverts ; Billets, Favoris et Profil invitent à se connecter, comme le cœur, l'abonnement et le signalement.
 
@@ -70,3 +73,9 @@ Photos : l'API renvoie des adresses en `localhost` ; sur l'émulateur Android, l
 | `flutter analyze` | vérification du code |
 | `flutter test` | tests |
 | `flutter build web --no-web-resources-cdn` | version web de test |
+
+## Billetterie (lot 2)
+- **Réserver** depuis la fiche : séance, billets, ramassage, options, noms des participants, billet en ligne ou réservation simple. Le paiement s'ouvre dans le navigateur de l'app (page de test en local) ; au retour, le billet se met à jour.
+- **Mes billets** : à venir et passés, QR code par billet, transfert à un ami (numéro ou lien), annulation, calendrier, itinéraire. Les billets sont gardés sur le téléphone et restent visibles **sans réseau** ; ils sont effacés à la déconnexion.
+- **Mode scan** (Profil → Mode scan, pour les organisateurs, leur équipe d'accueil et l'équipe Dowra) : la liste des billets est téléchargée, chaque scan est jugé sur place (vert, orange, rouge), même sans réseau, puis envoyé au retour du réseau. Compte de test : « Équipe d'accueil » (05 50 00 00 23), séance « Nuit dans les dunes de Taghit ».
+- Caméra : autorisation demandée au premier scan (Android `CAMERA`, iOS `NSCameraUsageDescription`). Sans caméra, le code du billet se saisit à la main.

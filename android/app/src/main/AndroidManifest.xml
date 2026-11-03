@@ -4,6 +4,8 @@
     <!-- « Près de moi » : position approximative ou précise, seulement quand l'app est ouverte. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Mode scan des organisateurs : lecture des QR codes des billets. -->
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:label="Dowra"
         android:name="${applicationName}"

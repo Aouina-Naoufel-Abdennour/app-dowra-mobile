@@ -66,6 +66,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Dowra utilise la caméra pour scanner les billets à l'entrée (mode scan des organisateurs).</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Dowra utilise ta position pour te montrer les sorties près de toi.</string>
 	<key>NSAppTransportSecurity</key>

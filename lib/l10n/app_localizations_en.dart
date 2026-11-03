@@ -603,4 +603,313 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginToContinue => 'Log in to continue';
+
+  @override
+  String get addToCalendar => 'Add to calendar';
+
+  @override
+  String alreadyBooked(int count) {
+    return '$count already booked';
+  }
+
+  @override
+  String get bookChannel => 'How do you want to book?';
+
+  @override
+  String get bookChoose => 'Pick at least one ticket.';
+
+  @override
+  String get bookConfirmFree => 'Confirm my registration';
+
+  @override
+  String get bookGroup => 'Going with friends';
+
+  @override
+  String get bookGroupText =>
+      'Create a group link and share it: everyone books their spot, or you pay for everyone and each friend collects their ticket.';
+
+  @override
+  String get bookHoldInfo =>
+      'Your spots are held for 10 minutes while you pay.';
+
+  @override
+  String bookHolder(int n) {
+    return 'Attendee $n';
+  }
+
+  @override
+  String get bookHolders => 'Attendee names';
+
+  @override
+  String get bookHoldersHint =>
+      'Personal tickets: each attendee\'s name is checked at the entrance.';
+
+  @override
+  String get bookNotAvailable =>
+      'This outing doesn\'t take bookings on Dowra yet.';
+
+  @override
+  String get bookNote => 'A message for the organizer (optional)';
+
+  @override
+  String get bookOnline => 'Ticket paid online';
+
+  @override
+  String get bookOnlineHint =>
+      'CIB or Edahabia: your spot is guaranteed right away.';
+
+  @override
+  String get bookOptions => 'Options';
+
+  @override
+  String bookPay(String amount) {
+    return 'Pay $amount';
+  }
+
+  @override
+  String get bookSendRequest => 'Send the request';
+
+  @override
+  String get bookSession => 'Pick your session';
+
+  @override
+  String get bookSimple => 'Simple booking';
+
+  @override
+  String get bookSimpleHint => 'The organizer confirms within 48 hours.';
+
+  @override
+  String get bookTitle => 'Book';
+
+  @override
+  String get callOrganizer => 'Call the organizer';
+
+  @override
+  String get cancelBooking => 'Cancel the booking';
+
+  @override
+  String get cancelBookingConfirm => 'Yes, cancel';
+
+  @override
+  String get cancelBookingText =>
+      'Tickets will be cancelled and the online payment refunded under the organizer\'s policy.';
+
+  @override
+  String cancelledBy(String who) {
+    return 'Cancelled by: $who';
+  }
+
+  @override
+  String get claimShare => 'Send the ticket link';
+
+  @override
+  String depositToPay(String amount) {
+    return 'Deposit to pay: $amount';
+  }
+
+  @override
+  String get entryDeadline => 'Entry until';
+
+  @override
+  String get findOuting => 'Find an outing';
+
+  @override
+  String get fromPrice => 'From';
+
+  @override
+  String fromWaitlist(String time) {
+    return 'Spot from the waiting list: pay before $time.';
+  }
+
+  @override
+  String get groupEach => 'Everyone pays their share';
+
+  @override
+  String get groupOne => 'I pay for everyone';
+
+  @override
+  String get groupShare => 'Group link';
+
+  @override
+  String get notCancellable =>
+      'Under the organizer\'s policy, this booking can no longer be cancelled.';
+
+  @override
+  String payBefore(String time) {
+    return 'Spots held until $time';
+  }
+
+  @override
+  String payNow(String amount) {
+    return 'Pay $amount';
+  }
+
+  @override
+  String get paymentMethod => 'Payment';
+
+  @override
+  String get placesAvailable => 'Spots available';
+
+  @override
+  String placesLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count spots left',
+      one: '1 spot left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get qrHint =>
+      'Show this QR code at the entrance. It stays visible offline.';
+
+  @override
+  String get refund => 'Refund';
+
+  @override
+  String get scanAdmitted => 'Admitted';
+
+  @override
+  String get scanAlreadyUsed => 'Already used';
+
+  @override
+  String get scanCameraError =>
+      'Camera unavailable: type the ticket code below.';
+
+  @override
+  String get scanCancelled => 'Cancelled ticket';
+
+  @override
+  String get scanCheck => 'Check';
+
+  @override
+  String get scanChoose =>
+      'Pick the session to check. The ticket list is downloaded so you can scan offline.';
+
+  @override
+  String get scanHint => 'Point at the ticket\'s QR code, or type its code.';
+
+  @override
+  String get scanManual => 'Ticket code';
+
+  @override
+  String get scanMode => 'Scan mode';
+
+  @override
+  String get scanNoSession => 'No session to check in the next 7 days.';
+
+  @override
+  String get scanOffline => 'Offline';
+
+  @override
+  String get scanOnline => 'Synced';
+
+  @override
+  String scanPending(int count) {
+    return '$count scan(s) to send';
+  }
+
+  @override
+  String get scanSync => 'Sync';
+
+  @override
+  String scanSyncedAt(String date) {
+    return 'Last sync: $date';
+  }
+
+  @override
+  String get scanUnknown => 'Unknown ticket';
+
+  @override
+  String get scanValid => 'Valid ticket';
+
+  @override
+  String scannedOn(String date) {
+    return 'Scanned on $date';
+  }
+
+  @override
+  String get soldOut => 'Sold out';
+
+  @override
+  String get soldOutWaitlist => 'Sold out · waiting list';
+
+  @override
+  String get ticketTitle => 'Ticket';
+
+  @override
+  String ticketsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tickets',
+      one: '1 ticket',
+      zero: 'No ticket',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ticketsEmptyPast => 'No past outings yet.';
+
+  @override
+  String get ticketsPast => 'Past';
+
+  @override
+  String get ticketsUpcoming => 'Upcoming';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get transferLink => 'Or send a link';
+
+  @override
+  String get transferName => 'Their name (optional)';
+
+  @override
+  String get transferPhone => 'Your friend\'s number';
+
+  @override
+  String get transferSend => 'Transfer';
+
+  @override
+  String get transferTicket => 'Transfer to a friend';
+
+  @override
+  String transferredFrom(String name) {
+    return 'From $name';
+  }
+
+  @override
+  String transferredTo(String name) {
+    return 'Transferred to $name';
+  }
+
+  @override
+  String waitingOrganizer(String date) {
+    return 'Waiting for the organizer: reply before $date.';
+  }
+
+  @override
+  String get waitlistJoin => 'Join the waiting list';
+
+  @override
+  String get waitlistJoined =>
+      'You\'re on the waiting list. We\'ll let you know as soon as a spot opens.';
+
+  @override
+  String get waitlistLeave => 'Leave';
+
+  @override
+  String get waitlistOffered =>
+      'A spot is waiting: pay for it in “My tickets”.';
+
+  @override
+  String get waitlistOn => 'You\'re on the waiting list.';
+
+  @override
+  String get offlineCopy => 'Offline: your tickets saved on this phone.';
 }

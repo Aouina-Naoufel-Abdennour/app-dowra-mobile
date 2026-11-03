@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/phone.dart';
+import '../core/booking_providers.dart';
 import '../core/providers.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/colors.dart';
@@ -60,6 +61,10 @@ class ProfileScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 14),
           _Tile(icon: Icons.person_outline_rounded, label: t.personalInfo, onTap: () => context.push('/profil/infos')),
+          if (user.roles.any(scanRoles.contains)) ...[
+            const SizedBox(height: 8),
+            _Tile(icon: Icons.qr_code_scanner_rounded, label: t.scanMode, onTap: () => context.push('/scan')),
+          ],
         ],
         const SizedBox(height: 22),
         Text(t.language, style: const TextStyle(fontWeight: FontWeight.w800)),

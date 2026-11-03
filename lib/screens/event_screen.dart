@@ -83,7 +83,8 @@ class _EventBodyState extends ConsumerState<_EventBody> {
     final fieldLabels = typeFieldLabels[lang] ?? typeFieldLabels['fr']!;
     final coordinates = e.card.lat != null && e.card.lng != null ? (e.card.lat!, e.card.lng!) : null;
 
-    return CustomScrollView(slivers: [
+    return Column(children: [
+      Expanded(child: CustomScrollView(slivers: [
       SliverAppBar(
         expandedHeight: 320,
         pinned: true,
@@ -183,7 +184,10 @@ class _EventBodyState extends ConsumerState<_EventBody> {
                       Text([formatTime(session.startsAt), if (session.label != null) session.label!].join(' · '), style: TextStyle(color: palette.muted, fontSize: 13)),
                     ]),
                   ),
-                  if (session.capacity != null) Text(t.placesCount(session.remaining ?? session.capacity!), style: TextStyle(color: palette.muted, fontSize: 12, fontWeight: FontWeight.w700)),
+                  if (session.soldOut)
+                    Text(t.soldOut, style: const TextStyle(color: DowraColors.error, fontSize: 12, fontWeight: FontWeight.w800))
+                  else if (session.capacity != null)
+                    Text(t.placesCount(session.remaining ?? session.capacity!), style: TextStyle(color: palette.muted, fontSize: 12, fontWeight: FontWeight.w700)),
                 ]),
               ),
           if (e.sessions.isNotEmpty && e.sessions.first.pickupPoints.isNotEmpty) ...[
@@ -252,6 +256,25 @@ class _EventBodyState extends ConsumerState<_EventBody> {
           _Similar(slug: e.card.slug),
         ]),
       ),
+    ])),
+      if (e.canBook)
+        Container(
+          padding: EdgeInsets.fromLTRB(20, 12, 20, MediaQuery.paddingOf(context).bottom + 12),
+          decoration: BoxDecoration(color: palette.surface, border: Border(top: BorderSide(color: palette.line))),
+          child: Row(children: [
+            Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(t.fromPrice, style: TextStyle(color: palette.muted, fontSize: 12)),
+              Text(e.card.isFree ? t.free : (e.card.priceFrom != null ? formatPrice(lang, e.card.priceFrom!) : '—'), style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
+            ]),
+            const SizedBox(width: 14),
+            Expanded(
+              child: GradientButton(
+                label: e.sessions.every((session) => session.soldOut) ? t.soldOutWaitlist : t.bookTitle,
+                onPressed: () => ref.read(sessionProvider).value == null ? context.push('/connexion') : context.push('/sorties/${e.card.slug}/reserver'),
+              ),
+            ),
+          ]),
+        ),
     ]);
   }
 

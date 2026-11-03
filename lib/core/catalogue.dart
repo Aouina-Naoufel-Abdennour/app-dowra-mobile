@@ -126,7 +126,17 @@ class EventCard {
 }
 
 class EventSessionInfo {
-  const EventSessionInfo({required this.id, required this.startsAt, this.endsAt, this.label, this.capacity, this.remaining, this.pickupPoints = const []});
+  const EventSessionInfo({
+    required this.id,
+    required this.startsAt,
+    this.endsAt,
+    this.label,
+    this.capacity,
+    this.remaining,
+    this.soldOut = false,
+    this.ticketsRemaining = const {},
+    this.pickupPoints = const [],
+  });
 
   final int id;
   final DateTime startsAt;
@@ -134,6 +144,10 @@ class EventSessionInfo {
   final String? label;
   final int? capacity;
   final int? remaining;
+  final bool soldOut;
+
+  /// Billets encore disponibles par type (null : illimité).
+  final Map<int, int?> ticketsRemaining;
   final List<({String label, String? time})> pickupPoints;
 
   factory EventSessionInfo.fromJson(Map<String, dynamic> json) => EventSessionInfo(
@@ -143,6 +157,10 @@ class EventSessionInfo {
         label: json['label'] as String?,
         capacity: json['capacity'] as int?,
         remaining: json['remaining'] as int?,
+        soldOut: json['sold_out'] == true,
+        ticketsRemaining: {
+          for (final entry in (json['tickets_remaining'] as Map? ?? const {}).entries) int.parse('${entry.key}'): entry.value as int?,
+        },
         pickupPoints: [
           for (final point in json['pickup_points'] as List? ?? const []) (label: '${point['label']}', time: point['time'] as String?),
         ],
@@ -241,6 +259,13 @@ class EventDetail {
     this.weather,
     required this.isFavorite,
     required this.shareUrl,
+    this.saleModeValue = 'en_ligne',
+    this.nominativeTickets = false,
+    this.bookingOptions = const [],
+    this.simplePaymentMethods = const [],
+    this.depositPercent,
+    this.entryDeadline,
+    this.bookable = false,
   });
 
   final EventCard card;
@@ -267,6 +292,18 @@ class EventDetail {
   final Weather? weather;
   final bool isFavorite;
   final String shareUrl;
+
+  /// 'en_ligne', 'reservation' ou 'les_deux'.
+  final String saleModeValue;
+  final bool nominativeTickets;
+  final List<({String code, String name, int price})> bookingOptions;
+  final List<({String value, String label})> simplePaymentMethods;
+  final int? depositPercent;
+  final String? entryDeadline;
+  final bool bookable;
+
+  /// Réservable maintenant sur Dowra : publié (ou reporté), avec billets et séances.
+  bool get canBook => bookable && (card.status == 'publie' || card.status == 'reporte');
 
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     final venue = json['venue'] as Map<String, dynamic>?;
@@ -300,6 +337,17 @@ class EventDetail {
       weather: Weather.fromJson(json['weather']),
       isFavorite: json['is_favorite'] == true,
       shareUrl: json['share_url'] as String? ?? '',
+      saleModeValue: (json['sale_mode'] as Map<String, dynamic>?)?['value'] as String? ?? 'en_ligne',
+      nominativeTickets: json['nominative_tickets'] == true,
+      bookingOptions: [
+        for (final option in json['booking_options'] as List? ?? const []) (code: '${option['code']}', name: '${option['name']}', price: option['price'] as int? ?? 0),
+      ],
+      simplePaymentMethods: [
+        for (final method in json['simple_payment_methods'] as List? ?? const []) (value: '${method['value']}', label: '${method['label']}'),
+      ],
+      depositPercent: json['deposit_percent'] as int?,
+      entryDeadline: json['entry_deadline'] as String?,
+      bookable: json['bookable'] == true,
     );
   }
 }

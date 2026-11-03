@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'api.dart';
+import 'bookings.dart';
 import 'catalogue.dart';
 import 'models.dart';
 import 'storage.dart';
@@ -121,4 +122,72 @@ class DowraRepository {
 
   Future<void> report({required String type, required String slug, required String reason, String? details}) =>
       _call(() => _dio.post('/reports', data: {'type': type, 'slug': slug, 'reason': reason, if (details != null && details.isNotEmpty) 'details': details}));
+
+  // ── Réservation et billets (lot 2) ──
+
+  Future<Availability> availability(String slug) => _call(() async {
+        final res = await _dio.get('/events/${Uri.encodeComponent(slug)}/availability');
+        return Availability.fromJson(res.data['data'] as Map<String, dynamic>);
+      });
+
+  Future<Booking> book(Map<String, Object?> data) => _call(() async {
+        final res = await _dio.post('/bookings', data: data);
+        return Booking.fromJson(res.data['data'] as Map<String, dynamic>);
+      });
+
+  /// Ouvre le paiement : adresse de la page du prestataire (null si la place était gratuite et est confirmée).
+  Future<({String? paymentUrl, Booking booking})> pay(String code, {String? returnUrl}) => _call(() async {
+        final res = await _dio.post('/bookings/${Uri.encodeComponent(code)}/pay', data: {'return_url': ?returnUrl});
+        final data = res.data['data'] as Map<String, dynamic>;
+        return (paymentUrl: data['payment_url'] as String?, booking: Booking.fromJson(data['booking'] as Map<String, dynamic>));
+      });
+
+  /// Réponse brute : gardée telle quelle sur le téléphone pour l'affichage hors connexion.
+  Future<List<Map<String, dynamic>>> bookingsJson(String scope) => _call(() async {
+        final res = await _dio.get('/me/bookings', queryParameters: {'scope': scope});
+        return [for (final item in res.data['data'] as List) item as Map<String, dynamic>];
+      });
+
+  Future<Map<String, dynamic>> bookingJson(String code) => _call(() async {
+        final res = await _dio.get('/me/bookings/${Uri.encodeComponent(code)}');
+        return res.data['data'] as Map<String, dynamic>;
+      });
+
+  Future<void> cancelBooking(String code) => _call(() => _dio.post('/bookings/${Uri.encodeComponent(code)}/cancel'));
+
+  Future<String> transferTicket(String ticket, String phone, {String? holderName}) => _call(() async {
+        final res = await _dio.post('/tickets/${Uri.encodeComponent(ticket)}/transfer', data: {'phone': phone, 'holder_name': ?holderName});
+        return res.data['message'] as String;
+      });
+
+  Future<String> ticketLink(String ticket) => _call(() async {
+        final res = await _dio.post('/tickets/${Uri.encodeComponent(ticket)}/link');
+        return res.data['data']['url'] as String;
+      });
+
+  Future<String> joinWaitlist(int session, {int? ticketTypeId, int quantity = 1}) => _call(() async {
+        final res = await _dio.post('/sessions/$session/waitlist', data: {'ticket_type_id': ?ticketTypeId, 'quantity': quantity});
+        return res.data['message'] as String;
+      });
+
+  Future<void> leaveWaitlist(int session) => _call(() => _dio.delete('/sessions/$session/waitlist'));
+
+  Future<String> createGroup(int session, String payMode) => _call(() async {
+        final res = await _dio.post('/booking-groups', data: {'event_session_id': session, 'pay_mode': payMode});
+        return res.data['data']['share_url'] as String;
+      });
+
+  // ── Mode scan ──
+
+  Future<List<ScanSession>> scanSessions() => _list('/scan/sessions', ScanSession.fromJson);
+
+  Future<Map<String, dynamic>> scanTickets(int session) => _call(() async {
+        final res = await _dio.get('/scan/sessions/$session/tickets');
+        return res.data['data'] as Map<String, dynamic>;
+      });
+
+  Future<Map<String, dynamic>> syncScans(int session, List<Map<String, dynamic>> scans, {String? since, String? device}) => _call(() async {
+        final res = await _dio.post('/scan/sessions/$session/sync', queryParameters: {'since': ?since}, data: {'scans': scans, 'device': ?device});
+        return res.data['data'] as Map<String, dynamic>;
+      });
 }

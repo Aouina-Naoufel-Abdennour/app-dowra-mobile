@@ -1161,6 +1161,510 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Connecte-toi pour continuer'**
   String get loginToContinue;
+
+  /// No description provided for @addToCalendar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter au calendrier'**
+  String get addToCalendar;
+
+  /// No description provided for @alreadyBooked.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} déjà réservé(s)'**
+  String alreadyBooked(int count);
+
+  /// No description provided for @bookChannel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Comment veux-tu réserver ?'**
+  String get bookChannel;
+
+  /// No description provided for @bookChoose.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisis au moins un billet.'**
+  String get bookChoose;
+
+  /// No description provided for @bookConfirmFree.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confirmer mon inscription'**
+  String get bookConfirmFree;
+
+  /// No description provided for @bookGroup.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sortir à plusieurs'**
+  String get bookGroup;
+
+  /// No description provided for @bookGroupText.
+  ///
+  /// In fr, this message translates to:
+  /// **'Crée un lien de groupe et partage-le : chacun réserve sa place, ou tu paies pour tout le monde et chacun récupère son billet.'**
+  String get bookGroupText;
+
+  /// No description provided for @bookHoldInfo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tes places sont bloquées 10 minutes pendant le paiement.'**
+  String get bookHoldInfo;
+
+  /// No description provided for @bookHolder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Participant {n}'**
+  String bookHolder(int n);
+
+  /// No description provided for @bookHolders.
+  ///
+  /// In fr, this message translates to:
+  /// **'Noms des participants'**
+  String get bookHolders;
+
+  /// No description provided for @bookHoldersHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billets nominatifs : le nom de chaque participant est contrôlé à l\'entrée.'**
+  String get bookHoldersHint;
+
+  /// No description provided for @bookNotAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette sortie ne prend pas encore de réservation sur Dowra.'**
+  String get bookNotAvailable;
+
+  /// No description provided for @bookNote.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un message pour l\'organisateur (facultatif)'**
+  String get bookNote;
+
+  /// No description provided for @bookOnline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billet payé en ligne'**
+  String get bookOnline;
+
+  /// No description provided for @bookOnlineHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'CIB ou Edahabia : ta place est garantie tout de suite.'**
+  String get bookOnlineHint;
+
+  /// No description provided for @bookOptions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Options'**
+  String get bookOptions;
+
+  /// No description provided for @bookPay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Payer {amount}'**
+  String bookPay(String amount);
+
+  /// No description provided for @bookSendRequest.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer la demande'**
+  String get bookSendRequest;
+
+  /// No description provided for @bookSession.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisis ta séance'**
+  String get bookSession;
+
+  /// No description provided for @bookSimple.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réservation simple'**
+  String get bookSimple;
+
+  /// No description provided for @bookSimpleHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'organisateur confirme sous 48 heures.'**
+  String get bookSimpleHint;
+
+  /// No description provided for @bookTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réserver'**
+  String get bookTitle;
+
+  /// No description provided for @callOrganizer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Appeler l\'organisateur'**
+  String get callOrganizer;
+
+  /// No description provided for @cancelBooking.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler la réservation'**
+  String get cancelBooking;
+
+  /// No description provided for @cancelBookingConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui, annuler'**
+  String get cancelBookingConfirm;
+
+  /// No description provided for @cancelBookingText.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les billets seront annulés et le paiement en ligne remboursé selon la règle de l\'organisateur.'**
+  String get cancelBookingText;
+
+  /// No description provided for @cancelledBy.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annulée par : {who}'**
+  String cancelledBy(String who);
+
+  /// No description provided for @claimShare.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer le lien du billet'**
+  String get claimShare;
+
+  /// No description provided for @depositToPay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Acompte à régler : {amount}'**
+  String depositToPay(String amount);
+
+  /// No description provided for @entryDeadline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrée jusqu\'à'**
+  String get entryDeadline;
+
+  /// No description provided for @findOuting.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trouver une sortie'**
+  String get findOuting;
+
+  /// No description provided for @fromPrice.
+  ///
+  /// In fr, this message translates to:
+  /// **'À partir de'**
+  String get fromPrice;
+
+  /// No description provided for @fromWaitlist.
+  ///
+  /// In fr, this message translates to:
+  /// **'Place proposée par la liste d\'attente : paie-la avant {time}.'**
+  String fromWaitlist(String time);
+
+  /// No description provided for @groupEach.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chacun paie sa part'**
+  String get groupEach;
+
+  /// No description provided for @groupOne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je paie pour tout le monde'**
+  String get groupOne;
+
+  /// No description provided for @groupShare.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien du groupe'**
+  String get groupShare;
+
+  /// No description provided for @notCancellable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Selon la règle de l\'organisateur, cette réservation ne peut plus être annulée.'**
+  String get notCancellable;
+
+  /// No description provided for @payBefore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Places bloquées jusqu\'à {time}'**
+  String payBefore(String time);
+
+  /// No description provided for @payNow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Payer {amount}'**
+  String payNow(String amount);
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiement'**
+  String get paymentMethod;
+
+  /// No description provided for @placesAvailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Places disponibles'**
+  String get placesAvailable;
+
+  /// No description provided for @placesLeft.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =1{1 place restante} other{{count} places restantes}}'**
+  String placesLeft(int count);
+
+  /// No description provided for @qrHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Présente ce QR code à l\'entrée. Il reste visible sans réseau.'**
+  String get qrHint;
+
+  /// No description provided for @refund.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remboursement'**
+  String get refund;
+
+  /// No description provided for @scanAdmitted.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrées'**
+  String get scanAdmitted;
+
+  /// No description provided for @scanAlreadyUsed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà utilisé'**
+  String get scanAlreadyUsed;
+
+  /// No description provided for @scanCameraError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Caméra indisponible : saisis le code du billet ci-dessous.'**
+  String get scanCameraError;
+
+  /// No description provided for @scanCancelled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billet annulé'**
+  String get scanCancelled;
+
+  /// No description provided for @scanCheck.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifier'**
+  String get scanCheck;
+
+  /// No description provided for @scanChoose.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisis la séance à contrôler. La liste des billets est téléchargée pour scanner même sans réseau.'**
+  String get scanChoose;
+
+  /// No description provided for @scanHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vise le QR code du billet, ou saisis son code.'**
+  String get scanHint;
+
+  /// No description provided for @scanManual.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code du billet'**
+  String get scanManual;
+
+  /// No description provided for @scanMode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode scan'**
+  String get scanMode;
+
+  /// No description provided for @scanNoSession.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune séance à contrôler dans les 7 prochains jours.'**
+  String get scanNoSession;
+
+  /// No description provided for @scanOffline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hors connexion'**
+  String get scanOffline;
+
+  /// No description provided for @scanOnline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Synchronisé'**
+  String get scanOnline;
+
+  /// No description provided for @scanPending.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} scan(s) à envoyer'**
+  String scanPending(int count);
+
+  /// No description provided for @scanSync.
+  ///
+  /// In fr, this message translates to:
+  /// **'Synchroniser'**
+  String get scanSync;
+
+  /// No description provided for @scanSyncedAt.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dernière synchronisation : {date}'**
+  String scanSyncedAt(String date);
+
+  /// No description provided for @scanUnknown.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billet inconnu'**
+  String get scanUnknown;
+
+  /// No description provided for @scanValid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billet valide'**
+  String get scanValid;
+
+  /// No description provided for @scannedOn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scanné le {date}'**
+  String scannedOn(String date);
+
+  /// No description provided for @soldOut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Complet'**
+  String get soldOut;
+
+  /// No description provided for @soldOutWaitlist.
+  ///
+  /// In fr, this message translates to:
+  /// **'Complet · liste d\'attente'**
+  String get soldOutWaitlist;
+
+  /// No description provided for @ticketTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Billet'**
+  String get ticketTitle;
+
+  /// No description provided for @ticketsCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{Aucun billet} =1{1 billet} other{{count} billets}}'**
+  String ticketsCount(int count);
+
+  /// No description provided for @ticketsEmptyPast.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore de sortie passée.'**
+  String get ticketsEmptyPast;
+
+  /// No description provided for @ticketsPast.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passés'**
+  String get ticketsPast;
+
+  /// No description provided for @ticketsUpcoming.
+  ///
+  /// In fr, this message translates to:
+  /// **'À venir'**
+  String get ticketsUpcoming;
+
+  /// No description provided for @total.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @transferLink.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ou envoyer un lien'**
+  String get transferLink;
+
+  /// No description provided for @transferName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Son nom (facultatif)'**
+  String get transferName;
+
+  /// No description provided for @transferPhone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Numéro de ton ami'**
+  String get transferPhone;
+
+  /// No description provided for @transferSend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transférer'**
+  String get transferSend;
+
+  /// No description provided for @transferTicket.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transférer à un ami'**
+  String get transferTicket;
+
+  /// No description provided for @transferredFrom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offert par {name}'**
+  String transferredFrom(String name);
+
+  /// No description provided for @transferredTo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transféré à {name}'**
+  String transferredTo(String name);
+
+  /// No description provided for @waitingOrganizer.
+  ///
+  /// In fr, this message translates to:
+  /// **'En attente de l\'organisateur : réponse avant {date}.'**
+  String waitingOrganizer(String date);
+
+  /// No description provided for @waitlistJoin.
+  ///
+  /// In fr, this message translates to:
+  /// **'M\'inscrire sur la liste d\'attente'**
+  String get waitlistJoin;
+
+  /// No description provided for @waitlistJoined.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu es sur la liste d\'attente. On te prévient dès qu\'une place se libère.'**
+  String get waitlistJoined;
+
+  /// No description provided for @waitlistLeave.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quitter'**
+  String get waitlistLeave;
+
+  /// No description provided for @waitlistOffered.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une place t\'attend : paie-la dans « Mes billets ».'**
+  String get waitlistOffered;
+
+  /// No description provided for @waitlistOn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu es sur la liste d\'attente.'**
+  String get waitlistOn;
+
+  /// No description provided for @offlineCopy.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hors connexion : tes billets gardés sur le téléphone.'**
+  String get offlineCopy;
 }
 
 class _AppLocalizationsDelegate
