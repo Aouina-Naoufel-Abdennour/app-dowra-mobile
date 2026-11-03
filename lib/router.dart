@@ -8,6 +8,7 @@ import 'screens/code_screen.dart';
 import 'screens/event_screen.dart';
 import 'screens/explore_screen.dart';
 import 'screens/favorites_screen.dart';
+import 'screens/gift_cards_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/organizer_screen.dart';
@@ -68,6 +69,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/sorties/:slug', builder: (_, state) => EventScreen(slug: state.pathParameters['slug']!)),
       GoRoute(path: '/sorties/:slug/reserver', builder: (_, state) => BookingScreen(slug: state.pathParameters['slug']!)),
       GoRoute(path: '/billets/:code', builder: (_, state) => TicketScreen(code: state.pathParameters['code']!)),
+      GoRoute(path: '/cartes-cadeaux', builder: (_, state) => GiftCardsScreen(eventSlug: state.uri.queryParameters['sortie'])),
       GoRoute(path: '/scan', builder: (_, _) => const ScanSessionsScreen()),
       GoRoute(path: '/scan/:session', builder: (_, state) => ScanScreen(sessionId: int.parse(state.pathParameters['session']!))),
       GoRoute(path: '/organisateurs/:slug', builder: (_, state) => OrganizerScreen(slug: state.pathParameters['slug']!)),

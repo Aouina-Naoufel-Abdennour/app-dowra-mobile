@@ -61,6 +61,8 @@ class ProfileScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 14),
           _Tile(icon: Icons.person_outline_rounded, label: t.personalInfo, onTap: () => context.push('/profil/infos')),
+          const SizedBox(height: 8),
+          _Tile(icon: Icons.card_giftcard_rounded, label: t.giftCards, onTap: () => context.push('/cartes-cadeaux')),
           if (user.roles.any(scanRoles.contains)) ...[
             const SizedBox(height: 8),
             _Tile(icon: Icons.qr_code_scanner_rounded, label: t.scanMode, onTap: () => context.push('/scan')),

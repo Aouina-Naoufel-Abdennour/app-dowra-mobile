@@ -912,4 +912,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offlineCopy => 'Offline: your tickets saved on this phone.';
+
+  @override
+  String get paymentCard => 'Payment card';
+
+  @override
+  String get paymentFees => 'Payment fees';
+
+  @override
+  String get giftCodeOptional => 'Gift card (optional)';
+
+  @override
+  String get giftCard => 'Gift card';
+
+  @override
+  String get downloadReceipt => 'PDF receipt';
+
+  @override
+  String get giftCards => 'Gift cards';
+
+  @override
+  String get giftTitle => 'Give an';
+
+  @override
+  String get giftTitleEm => 'outing';
+
+  @override
+  String get giftLead =>
+      'A Dowra gift card, valid for 12 months on every outing booked online. Your friend gets the code by SMS.';
+
+  @override
+  String get myGiftCards => 'My gift cards';
+
+  @override
+  String get giftOffer => 'Give a card';
+
+  @override
+  String giftEvent(String event) {
+    return 'You are giving: $event';
+  }
+
+  @override
+  String get giftOther => 'Other amount';
+
+  @override
+  String get giftRecipient => 'Their first name';
+
+  @override
+  String get giftRecipientRequired => 'Enter their first name.';
+
+  @override
+  String get giftRecipientPhone => 'Their number (code sent by SMS)';
+
+  @override
+  String get giftMessage => 'A short note (optional)';
+
+  @override
+  String giftSentTo(String name) {
+    return 'Given to $name';
+  }
+
+  @override
+  String get giftReceived => 'Received';
+
+  @override
+  String giftBalance(String amount) {
+    return 'Balance: $amount';
+  }
+
+  @override
+  String giftValidUntil(String date) {
+    return 'until $date';
+  }
+
+  @override
+  String get giftThisOuting => 'Give this outing';
 }

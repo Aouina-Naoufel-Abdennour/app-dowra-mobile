@@ -463,5 +463,55 @@
   "waitlistLeave": "Quitter",
   "waitlistOffered": "Une place t'attend : paie-la dans « Mes billets ».",
   "waitlistOn": "Tu es sur la liste d'attente.",
-  "offlineCopy": "Hors connexion : tes billets gardés sur le téléphone."
+  "offlineCopy": "Hors connexion : tes billets gardés sur le téléphone.",
+  "paymentCard": "Carte de paiement",
+  "paymentFees": "Frais de paiement",
+  "giftCodeOptional": "Carte cadeau (facultatif)",
+  "giftCard": "Carte cadeau",
+  "downloadReceipt": "Reçu PDF",
+  "giftCards": "Cartes cadeaux",
+  "giftTitle": "Offre une",
+  "giftTitleEm": "sortie",
+  "giftLead": "Une carte cadeau Dowra, valable 12 mois sur toutes les sorties réservables en ligne. Ton ami reçoit son code par SMS.",
+  "myGiftCards": "Mes cartes cadeaux",
+  "giftOffer": "Offrir une carte",
+  "giftEvent": "Tu offres : {event}",
+  "@giftEvent": {
+    "placeholders": {
+      "event": {
+        "type": "String"
+      }
+    }
+  },
+  "giftOther": "Autre montant",
+  "giftRecipient": "Prénom de la personne",
+  "giftRecipientRequired": "Indique le prénom de la personne.",
+  "giftRecipientPhone": "Son numéro (code envoyé par SMS)",
+  "giftMessage": "Un petit mot (facultatif)",
+  "giftSentTo": "Offerte à {name}",
+  "@giftSentTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "giftReceived": "Reçue",
+  "giftBalance": "Solde : {amount}",
+  "@giftBalance": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "giftValidUntil": "jusqu'au {date}",
+  "@giftValidUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "giftThisOuting": "Offrir cette sortie"
 }

@@ -897,4 +897,79 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get offlineCopy => 'دون اتصال: تذاكرك المحفوظة على الهاتف.';
+
+  @override
+  String get paymentCard => 'بطاقة الدفع';
+
+  @override
+  String get paymentFees => 'رسوم الدفع';
+
+  @override
+  String get giftCodeOptional => 'بطاقة هدية (اختياري)';
+
+  @override
+  String get giftCard => 'بطاقة هدية';
+
+  @override
+  String get downloadReceipt => 'الوصل PDF';
+
+  @override
+  String get giftCards => 'بطاقات الهدايا';
+
+  @override
+  String get giftTitle => 'أهدِ';
+
+  @override
+  String get giftTitleEm => 'خرجة';
+
+  @override
+  String get giftLead =>
+      'بطاقة هدية من دورة، صالحة 12 شهرًا لكل الخرجات القابلة للحجز عبر الإنترنت. يصل الرمز لصديقك برسالة قصيرة.';
+
+  @override
+  String get myGiftCards => 'بطاقاتي';
+
+  @override
+  String get giftOffer => 'أهدِ بطاقة';
+
+  @override
+  String giftEvent(String event) {
+    return 'تهدي: $event';
+  }
+
+  @override
+  String get giftOther => 'مبلغ آخر';
+
+  @override
+  String get giftRecipient => 'اسم الشخص';
+
+  @override
+  String get giftRecipientRequired => 'أدخل اسم الشخص.';
+
+  @override
+  String get giftRecipientPhone => 'رقمه (يُرسل الرمز برسالة قصيرة)';
+
+  @override
+  String get giftMessage => 'كلمة صغيرة (اختياري)';
+
+  @override
+  String giftSentTo(String name) {
+    return 'مهداة إلى $name';
+  }
+
+  @override
+  String get giftReceived => 'مستلمة';
+
+  @override
+  String giftBalance(String amount) {
+    return 'الرصيد: $amount';
+  }
+
+  @override
+  String giftValidUntil(String date) {
+    return 'حتى $date';
+  }
+
+  @override
+  String get giftThisOuting => 'أهدِ هذه الخرجة';
 }

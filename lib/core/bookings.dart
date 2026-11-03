@@ -1,4 +1,5 @@
 import 'catalogue.dart';
+import 'fees.dart';
 
 typedef Label = ({String value, String label});
 
@@ -72,6 +73,11 @@ class Booking {
     required this.options,
     this.pickupPoint,
     this.total,
+    this.fees = 0,
+    this.giftAmount = 0,
+    this.amountDue,
+    this.paymentFees,
+    this.invoiceUrl,
     this.depositAmount,
     this.paymentMethod,
     this.refundedAmount = 0,
@@ -110,6 +116,13 @@ class Booking {
   final List<({String name, int quantity, int price})> options;
   final String? pickupPoint;
   final int? total;
+  final int fees;
+  final int giftAmount;
+
+  /// Montant à payer en ligne maintenant (billets moins carte cadeau, ou acompte).
+  final int? amountDue;
+  final PaymentFees? paymentFees;
+  final String? invoiceUrl;
   final int? depositAmount;
   final String? paymentMethod;
   final int refundedAmount;
@@ -154,6 +167,11 @@ class Booking {
       options: [for (final option in json['options'] as List? ?? const []) (name: '${option['name']}', quantity: option['quantity'] as int, price: option['price'] as int)],
       pickupPoint: pickup == null ? null : [if (pickup['time'] != null) pickup['time'], pickup['label']].join(' · '),
       total: json['total'] as int?,
+      fees: json['fees'] as int? ?? 0,
+      giftAmount: json['gift_amount'] as int? ?? 0,
+      amountDue: json['amount_due'] as int?,
+      paymentFees: json['payment_fees'] == null ? null : PaymentFees.fromJson(json['payment_fees']),
+      invoiceUrl: json['invoice_url'] as String?,
       depositAmount: json['deposit_amount'] as int?,
       paymentMethod: json['payment_method'] == null ? null : _label(json['payment_method']).label,
       refundedAmount: ((json['payment'] as Map?)?['refunded_amount'] as int?) ?? 0,
@@ -249,4 +267,52 @@ String? ticketCodeFrom(String scanned) {
   if (qr != null) return qr.group(1);
   final manual = value.toUpperCase();
   return RegExp(r'^T[A-Z0-9]{9}$').hasMatch(manual) ? manual : null;
+}
+
+/// Carte cadeau (offerte ou reçue).
+class GiftCard {
+  const GiftCard({required this.code, required this.amount, required this.balance, required this.status, this.eventTitle, this.eventSlug, this.recipientName, this.message, required this.isBuyer, required this.usable, this.expiresAt});
+
+  final String code;
+  final int amount;
+  final int balance;
+  final Label status;
+  final String? eventTitle;
+  final String? eventSlug;
+  final String? recipientName;
+  final String? message;
+  final bool isBuyer;
+  final bool usable;
+  final DateTime? expiresAt;
+
+  factory GiftCard.fromJson(Map<String, dynamic> json) => GiftCard(
+        code: '${json['code']}',
+        amount: json['amount'] as int,
+        balance: json['balance'] as int,
+        status: _label(json['status']),
+        eventTitle: (json['event'] as Map?)?['title'] as String?,
+        eventSlug: (json['event'] as Map?)?['slug'] as String?,
+        recipientName: json['recipient_name'] as String?,
+        message: json['message'] as String?,
+        isBuyer: json['is_buyer'] == true,
+        usable: json['usable'] == true,
+        expiresAt: DateTime.tryParse(json['expires_at'] as String? ?? ''),
+      );
+}
+
+/// Montants proposés pour une carte cadeau et barème des frais.
+class GiftOptions {
+  const GiftOptions({required this.min, required this.max, required this.suggested, required this.fees});
+
+  final int min;
+  final int max;
+  final List<int> suggested;
+  final PaymentFees fees;
+
+  factory GiftOptions.fromJson(Map<String, dynamic> json) => GiftOptions(
+        min: json['min'] as int? ?? 1000,
+        max: json['max'] as int? ?? 50000,
+        suggested: [for (final value in json['suggested'] as List? ?? const []) value as int],
+        fees: PaymentFees.fromJson(json['payment_fees']),
+      );
 }

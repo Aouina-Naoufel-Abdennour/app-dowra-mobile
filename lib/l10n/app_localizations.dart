@@ -1665,6 +1665,138 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Hors connexion : tes billets gardés sur le téléphone.'**
   String get offlineCopy;
+
+  /// No description provided for @paymentCard.
+  ///
+  /// In fr, this message translates to:
+  /// **'Carte de paiement'**
+  String get paymentCard;
+
+  /// No description provided for @paymentFees.
+  ///
+  /// In fr, this message translates to:
+  /// **'Frais de paiement'**
+  String get paymentFees;
+
+  /// No description provided for @giftCodeOptional.
+  ///
+  /// In fr, this message translates to:
+  /// **'Carte cadeau (facultatif)'**
+  String get giftCodeOptional;
+
+  /// No description provided for @giftCard.
+  ///
+  /// In fr, this message translates to:
+  /// **'Carte cadeau'**
+  String get giftCard;
+
+  /// No description provided for @downloadReceipt.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reçu PDF'**
+  String get downloadReceipt;
+
+  /// No description provided for @giftCards.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cartes cadeaux'**
+  String get giftCards;
+
+  /// No description provided for @giftTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offre une'**
+  String get giftTitle;
+
+  /// No description provided for @giftTitleEm.
+  ///
+  /// In fr, this message translates to:
+  /// **'sortie'**
+  String get giftTitleEm;
+
+  /// No description provided for @giftLead.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une carte cadeau Dowra, valable 12 mois sur toutes les sorties réservables en ligne. Ton ami reçoit son code par SMS.'**
+  String get giftLead;
+
+  /// No description provided for @myGiftCards.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes cartes cadeaux'**
+  String get myGiftCards;
+
+  /// No description provided for @giftOffer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offrir une carte'**
+  String get giftOffer;
+
+  /// No description provided for @giftEvent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu offres : {event}'**
+  String giftEvent(String event);
+
+  /// No description provided for @giftOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre montant'**
+  String get giftOther;
+
+  /// No description provided for @giftRecipient.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prénom de la personne'**
+  String get giftRecipient;
+
+  /// No description provided for @giftRecipientRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indique le prénom de la personne.'**
+  String get giftRecipientRequired;
+
+  /// No description provided for @giftRecipientPhone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Son numéro (code envoyé par SMS)'**
+  String get giftRecipientPhone;
+
+  /// No description provided for @giftMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un petit mot (facultatif)'**
+  String get giftMessage;
+
+  /// No description provided for @giftSentTo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offerte à {name}'**
+  String giftSentTo(String name);
+
+  /// No description provided for @giftReceived.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reçue'**
+  String get giftReceived;
+
+  /// No description provided for @giftBalance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Solde : {amount}'**
+  String giftBalance(String amount);
+
+  /// No description provided for @giftValidUntil.
+  ///
+  /// In fr, this message translates to:
+  /// **'jusqu\'au {date}'**
+  String giftValidUntil(String date);
+
+  /// No description provided for @giftThisOuting.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offrir cette sortie'**
+  String get giftThisOuting;
 }
 
 class _AppLocalizationsDelegate

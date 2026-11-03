@@ -69,6 +69,8 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
   late String _channel = e.saleModeValue == 'reservation' ? 'reservation' : 'en_ligne';
   late String _method = e.simplePaymentMethods.firstOrNull?.value ?? 'sur_place';
   final _note = TextEditingController();
+  final _gift = TextEditingController();
+  String _card = 'cib';
   bool _busy = false;
   String? _error;
 
@@ -86,6 +88,7 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
       controller.dispose();
     }
     _note.dispose();
+    _gift.dispose();
     super.dispose();
   }
 
@@ -133,9 +136,10 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
         ],
         if (e.nominativeTickets) 'holders': [for (final c in _holders.take(count)) c.text.trim()],
         if (_note.text.trim().isNotEmpty) 'note': _note.text.trim(),
+        if (_channel == 'en_ligne' && _gift.text.trim().isNotEmpty) 'gift_card_code': _gift.text.trim().toUpperCase(),
       });
       if (booking.status.value == 'bloquee') {
-        final payment = await repository.pay(booking.code);
+        final payment = await repository.pay(booking.code, method: _card);
         if (payment.paymentUrl != null) {
           await launchUrl(Uri.parse(payment.paymentUrl!), mode: LaunchMode.inAppBrowserView);
         }
@@ -186,6 +190,8 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
     final s = session;
     final channels = e.saleModeValue == 'les_deux' ? ['en_ligne', 'reservation'] : [_channel];
     final deposit = _channel == 'reservation' && _method == 'acompte' && e.depositPercent != null ? (total * e.depositPercent! / 100).ceil() : null;
+    final hasGift = _gift.text.trim().isNotEmpty;
+    final fees = _channel == 'en_ligne' && !hasGift ? e.paymentFees.forAmount(total, _card) : 0;
 
     if (!e.canBook || a.sessions.isEmpty) {
       return Padding(padding: const EdgeInsets.all(20), child: DowriCard(mood: DowriMood.repos, text: t.bookNotAvailable));
@@ -285,6 +291,20 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
                   child: TextField(controller: _note, maxLength: 500, maxLines: 3, decoration: InputDecoration(labelText: t.bookNote)),
                 ),
             ],
+            if (_channel == 'en_ligne' && total > 0) ...[
+              _Title(t.paymentCard),
+              Wrap(spacing: 8, children: [
+                ChoicePill(label: 'CIB', selected: _card == 'cib', onTap: () => setState(() => _card = 'cib')),
+                ChoicePill(label: 'Edahabia', selected: _card == 'edahabia', onTap: () => setState(() => _card = 'edahabia')),
+              ]),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _gift,
+                textCapitalization: TextCapitalization.characters,
+                onChanged: (_) => setState(() {}),
+                decoration: InputDecoration(labelText: t.giftCodeOptional, hintText: 'KDO…', prefixIcon: const Icon(Icons.card_giftcard_rounded)),
+              ),
+            ],
             _Title(t.bookGroup),
             Text(t.bookGroupText, style: TextStyle(color: palette.muted, height: 1.4)),
             const SizedBox(height: 10),
@@ -307,6 +327,12 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
               const Spacer(),
               Text(count == 0 ? '—' : (total == 0 ? t.free : formatPrice(lang, total)), style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
             ]),
+            if (fees > 0)
+              Row(children: [
+                Text(t.paymentFees, style: TextStyle(color: palette.muted, fontSize: 13)),
+                const Spacer(),
+                Text(formatPrice(lang, fees), style: TextStyle(color: palette.muted, fontSize: 13, fontWeight: FontWeight.w700)),
+              ]),
             if (deposit != null) Align(alignment: AlignmentDirectional.centerEnd, child: Text(t.depositToPay(formatPrice(lang, deposit)), style: TextStyle(color: palette.muted, fontSize: 13))),
             const SizedBox(height: 10),
             GradientButton(
@@ -316,7 +342,7 @@ class _BookingFormState extends ConsumerState<_BookingForm> {
                       ? t.bookSendRequest
                       : total == 0
                           ? t.bookConfirmFree
-                          : t.bookPay(formatPrice(lang, total)),
+                          : t.bookPay(formatPrice(lang, total + fees)),
               loading: _busy,
               onPressed: count == 0 || seats == 0 ? null : _submit,
             ),

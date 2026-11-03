@@ -136,8 +136,8 @@ class DowraRepository {
       });
 
   /// Ouvre le paiement : adresse de la page du prestataire (null si la place était gratuite et est confirmée).
-  Future<({String? paymentUrl, Booking booking})> pay(String code, {String? returnUrl}) => _call(() async {
-        final res = await _dio.post('/bookings/${Uri.encodeComponent(code)}/pay', data: {'return_url': ?returnUrl});
+  Future<({String? paymentUrl, Booking booking})> pay(String code, {String method = 'cib', String? returnUrl}) => _call(() async {
+        final res = await _dio.post('/bookings/${Uri.encodeComponent(code)}/pay', data: {'method': method, 'return_url': ?returnUrl});
         final data = res.data['data'] as Map<String, dynamic>;
         return (paymentUrl: data['payment_url'] as String?, booking: Booking.fromJson(data['booking'] as Map<String, dynamic>));
       });
@@ -189,5 +189,20 @@ class DowraRepository {
   Future<Map<String, dynamic>> syncScans(int session, List<Map<String, dynamic>> scans, {String? since, String? device}) => _call(() async {
         final res = await _dio.post('/scan/sessions/$session/sync', queryParameters: {'since': ?since}, data: {'scans': scans, 'device': ?device});
         return res.data['data'] as Map<String, dynamic>;
+      });
+
+  // ── Cartes cadeaux ──
+
+  Future<GiftOptions> giftOptions() => _call(() async {
+        final res = await _dio.get('/gift-cards/options');
+        return GiftOptions.fromJson(res.data['data'] as Map<String, dynamic>);
+      });
+
+  Future<List<GiftCard>> myGiftCards() => _list('/me/gift-cards', GiftCard.fromJson);
+
+  /// Achat : renvoie l'adresse de la page de paiement.
+  Future<String> buyGiftCard(Map<String, Object?> data) => _call(() async {
+        final res = await _dio.post('/gift-cards', data: data);
+        return res.data['data']['payment_url'] as String;
       });
 }

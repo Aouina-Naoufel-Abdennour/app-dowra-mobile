@@ -62,11 +62,39 @@ class _TicketScreenState extends ConsumerState<TicketScreen> with WidgetsBinding
     }
   }
 
-  Future<void> _pay(Booking booking) => _run(() async {
-        final payment = await ref.read(repositoryProvider).pay(booking.code);
+  Future<void> _pay(Booking booking) async {
+    final t = AppLocalizations.of(context);
+    final lang = ref.read(localeProvider);
+    final due = booking.amountDue ?? 0;
+    var method = 'cib';
+    if (due > 0) {
+      final chosen = await showModalBottomSheet<String>(
+        context: context,
+        showDragHandle: true,
+        builder: (sheet) => SafeArea(
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Text(t.paymentCard, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            for (final (value, label) in [('cib', 'CIB'), ('edahabia', 'Edahabia')])
+              ListTile(
+                leading: const Icon(Icons.credit_card_rounded),
+                title: Text(label, style: const TextStyle(fontWeight: FontWeight.w700)),
+                subtitle: Text('${t.paymentFees} : ${formatPrice(lang, booking.paymentFees?.forAmount(due, value) ?? 0)}'),
+                trailing: Text(formatPrice(lang, due + (booking.paymentFees?.forAmount(due, value) ?? 0)), style: const TextStyle(fontWeight: FontWeight.w800)),
+                onTap: () => Navigator.pop(sheet, value),
+              ),
+            const SizedBox(height: 12),
+          ]),
+        ),
+      );
+      if (chosen == null) return;
+      method = chosen;
+    }
+    await _run(() async {
+        final payment = await ref.read(repositoryProvider).pay(booking.code, method: method);
         if (payment.paymentUrl != null) await launchUrl(Uri.parse(payment.paymentUrl!), mode: LaunchMode.inAppBrowserView);
         _refresh();
       });
+  }
 
   Future<void> _cancel(Booking booking) async {
     final t = AppLocalizations.of(context);
@@ -158,7 +186,7 @@ class _TicketScreenState extends ConsumerState<TicketScreen> with WidgetsBinding
         _Notice(
           color: DowraColors.sun.withValues(alpha: 0.3),
           text: b.fromWaitlist ? t.fromWaitlist(formatTime(b.holdExpiresAt!)) : t.payBefore(formatTime(b.holdExpiresAt!)),
-          action: GradientButton(label: (b.total ?? 0) > 0 ? t.payNow(formatPrice(lang, b.total!)) : t.bookConfirmFree, loading: _busy, onPressed: offline ? null : () => _pay(b)),
+          action: GradientButton(label: (b.amountDue ?? 0) > 0 ? t.payNow(formatPrice(lang, b.amountDue!)) : t.bookConfirmFree, loading: _busy, onPressed: offline ? null : () => _pay(b)),
         )
       else if (b.status.value == 'en_attente' && b.respondBy != null)
         _Notice(
@@ -182,12 +210,16 @@ class _TicketScreenState extends ConsumerState<TicketScreen> with WidgetsBinding
       if (b.entryDeadline != null) _Row(t.entryDeadline, b.entryDeadline!),
       for (final item in b.items) _Row('${item.quantity} × ${item.name}', item.unitPrice == 0 ? t.free : formatPrice(lang, item.quantity * item.unitPrice)),
       for (final option in b.options) _Row('${option.quantity} × ${option.name}', formatPrice(lang, option.quantity * option.price)),
-      if (b.total != null) _Row(t.total, b.total == 0 ? t.free : formatPrice(lang, b.total!), strong: true),
+      if (b.giftAmount > 0) _Row(t.giftCard, '− ${formatPrice(lang, b.giftAmount)}'),
+      if (b.fees > 0) _Row(t.paymentFees, formatPrice(lang, b.fees)),
+      if (b.total != null) _Row(t.total, b.total == 0 ? t.free : formatPrice(lang, b.total! - b.giftAmount + b.fees), strong: true),
       if (b.paymentMethod != null) _Row(t.paymentMethod, b.paymentMethod!),
       if (b.refundedAmount > 0) _Row(t.refund, formatPrice(lang, b.refundedAmount)),
       _Row(t.cancellation, b.policy),
       const SizedBox(height: 14),
       Wrap(spacing: 8, runSpacing: 8, children: [
+        if (b.invoiceUrl != null)
+          OutlinePillButton(label: t.downloadReceipt, icon: Icons.receipt_long_outlined, onPressed: () => launchUrl(Uri.parse(b.invoiceUrl!), mode: LaunchMode.externalApplication)),
         if (b.status.value == 'confirmee')
           OutlinePillButton(label: t.addToCalendar, icon: Icons.event_outlined, onPressed: () => launchUrl(Uri.parse(b.calendarUrl), mode: LaunchMode.externalApplication)),
         if (b.lat != null && b.lng != null)

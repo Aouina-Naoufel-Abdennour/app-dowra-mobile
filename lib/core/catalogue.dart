@@ -1,4 +1,5 @@
 import 'api.dart';
+import 'fees.dart';
 
 /// Adresse d'une image de l'API. Sur l'émulateur Android, « localhost » désigne le téléphone :
 /// les adresses locales sont réécrites vers l'hôte de l'API (10.0.2.2).
@@ -266,6 +267,7 @@ class EventDetail {
     this.depositPercent,
     this.entryDeadline,
     this.bookable = false,
+    this.paymentFees = const PaymentFees(),
   });
 
   final EventCard card;
@@ -301,6 +303,7 @@ class EventDetail {
   final int? depositPercent;
   final String? entryDeadline;
   final bool bookable;
+  final PaymentFees paymentFees;
 
   /// Réservable maintenant sur Dowra : publié (ou reporté), avec billets et séances.
   bool get canBook => bookable && (card.status == 'publie' || card.status == 'reporte');
@@ -348,6 +351,7 @@ class EventDetail {
       depositPercent: json['deposit_percent'] as int?,
       entryDeadline: json['entry_deadline'] as String?,
       bookable: json['bookable'] == true,
+      paymentFees: PaymentFees.fromJson(json['payment_fees']),
     );
   }
 }

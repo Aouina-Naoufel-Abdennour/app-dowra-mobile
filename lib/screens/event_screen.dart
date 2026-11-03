@@ -252,6 +252,10 @@ class _EventBodyState extends ConsumerState<_EventBody> {
             ),
           ],
           const SizedBox(height: 16),
+          if (e.canBook && (e.card.priceFrom ?? 0) > 0) ...[
+            OutlinePillButton(label: t.giftThisOuting, icon: Icons.card_giftcard_rounded, onPressed: () => context.push('/cartes-cadeaux?sortie=${e.card.slug}')),
+            const SizedBox(height: 8),
+          ],
           OutlinePillButton(label: t.report, icon: Icons.flag_outlined, onPressed: () => showReportSheet(context, ref, type: 'event', slug: e.card.slug, title: t.reportTitle)),
           _Similar(slug: e.card.slug),
         ]),

@@ -345,4 +345,36 @@ void main() {
     expect(sent.whereType<List>().expand((batch) => batch).map((scan) => (scan as Map)['code']), contains('DOWRA:TABCDE2345:abcdefghijkl'));
     await tester.pumpWidget(const SizedBox());
   });
+
+  testWidgets('offrir une carte cadeau envoie le montant, le destinataire et la carte choisie', (tester) async {
+    when(() => repository.currentUser()).thenAnswer((_) async => user(name: 'Amina', onboarded: true));
+    when(() => repository.myGiftCards()).thenAnswer((_) async => []);
+    when(() => repository.giftOptions()).thenAnswer((_) async => GiftOptions.fromJson({
+          'min': 1000,
+          'max': 50000,
+          'suggested': [2000, 5000, 10000],
+          'payment_fees': {'cib': 1.5, 'edahabia': 2, 'minimum': 20},
+        }));
+    when(() => repository.buyGiftCard(any())).thenAnswer((_) async => 'http://localhost:8000/paiement-simule/PAYTEST');
+
+    await launch(tester, introSeen: true);
+    await tester.tap(find.bySemanticsLabel('Profil'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Cartes cadeaux'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Payer 5 075 DA'), findsOneWidget);
+    await tester.tap(find.text('Edahabia'));
+    await tester.enterText(find.widgetWithText(TextField, 'Prénom de la personne'), 'Lina');
+    await tester.enterText(find.widgetWithText(TextField, 'Son numéro (code envoyé par SMS)'), '0550000098');
+    await tester.pumpAndSettle();
+    expect(find.text('Payer 5 100 DA'), findsOneWidget);
+    await tester.ensureVisible(find.text('Payer 5 100 DA'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Payer 5 100 DA'));
+    await tester.pump(const Duration(milliseconds: 500));
+
+    final sent = verify(() => repository.buyGiftCard(captureAny())).captured.single as Map<String, Object?>;
+    expect(sent, {'amount': 5000, 'recipient_name': 'Lina', 'recipient_phone': '0550000098', 'method': 'edahabia'});
+  });
 }

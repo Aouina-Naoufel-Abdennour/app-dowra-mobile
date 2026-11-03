@@ -58,3 +58,10 @@ final scanSessionsProvider = FutureProvider<List<ScanSession>>((ref) {
 
 /// Rôles qui ouvrent le mode scan : organisateurs, leur équipe et l'équipe Dowra.
 const scanRoles = {'organisateur', 'membre_organisateur', 'super_admin', 'moderateur'};
+
+final giftOptionsProvider = FutureProvider<GiftOptions>((ref) => ref.watch(repositoryProvider).giftOptions());
+
+final myGiftCardsProvider = FutureProvider<List<GiftCard>>((ref) async {
+  if (ref.watch(sessionProvider).value == null) return const [];
+  return ref.watch(repositoryProvider).myGiftCards();
+});

@@ -917,4 +917,79 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get offlineCopy =>
       'Hors connexion : tes billets gardés sur le téléphone.';
+
+  @override
+  String get paymentCard => 'Carte de paiement';
+
+  @override
+  String get paymentFees => 'Frais de paiement';
+
+  @override
+  String get giftCodeOptional => 'Carte cadeau (facultatif)';
+
+  @override
+  String get giftCard => 'Carte cadeau';
+
+  @override
+  String get downloadReceipt => 'Reçu PDF';
+
+  @override
+  String get giftCards => 'Cartes cadeaux';
+
+  @override
+  String get giftTitle => 'Offre une';
+
+  @override
+  String get giftTitleEm => 'sortie';
+
+  @override
+  String get giftLead =>
+      'Une carte cadeau Dowra, valable 12 mois sur toutes les sorties réservables en ligne. Ton ami reçoit son code par SMS.';
+
+  @override
+  String get myGiftCards => 'Mes cartes cadeaux';
+
+  @override
+  String get giftOffer => 'Offrir une carte';
+
+  @override
+  String giftEvent(String event) {
+    return 'Tu offres : $event';
+  }
+
+  @override
+  String get giftOther => 'Autre montant';
+
+  @override
+  String get giftRecipient => 'Prénom de la personne';
+
+  @override
+  String get giftRecipientRequired => 'Indique le prénom de la personne.';
+
+  @override
+  String get giftRecipientPhone => 'Son numéro (code envoyé par SMS)';
+
+  @override
+  String get giftMessage => 'Un petit mot (facultatif)';
+
+  @override
+  String giftSentTo(String name) {
+    return 'Offerte à $name';
+  }
+
+  @override
+  String get giftReceived => 'Reçue';
+
+  @override
+  String giftBalance(String amount) {
+    return 'Solde : $amount';
+  }
+
+  @override
+  String giftValidUntil(String date) {
+    return 'jusqu\'au $date';
+  }
+
+  @override
+  String get giftThisOuting => 'Offrir cette sortie';
 }
